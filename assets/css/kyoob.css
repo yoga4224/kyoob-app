@@ -1,0 +1,248 @@
+body {
+    background-color: #eaeef0;
+    background-image: url(../images/headerbg.png);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Maven Pro', sans-serif;
+    color: #263646;
+}
+
+
+.f700 {
+    font-weight: 700;
+    color: #263646;
+}
+
+.f500 {
+    font-weight: 500;
+    color: #263646;
+}
+
+.ttl-login {
+    font-size: 17px;
+}
+
+.sub-login {
+    font-size: 13px;
+}
+
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box
+}
+
+.wrapper {
+    max-width: 600px;
+    border-radius: 10px;
+    margin: 50px auto;
+    padding: 30px 40px;
+    
+}
+
+.h2 {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #400485;
+    font-style: italic
+}
+
+.h4 {
+    font-family: 'Maven Pro', sans-serif
+}
+
+.input-field {
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: solid 1px #f6f6f6;
+    background-color: #f6f6f6;
+}
+
+.input-field:hover {
+    color: #f6f6f6;
+    border: 1px solid #dd679d
+}
+
+input {
+    border: none;
+    width: 100%;
+    padding: 0px 2px;
+    font-family: 'Maven Pro', sans-serif;
+    background-color: #f6f6f6;
+    border: none;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  outline: none;
+  border: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  
+  -webkit-box-shadow: 0 0 0px 1000px #f6f6f6 inset;
+  
+}
+
+
+.right-fix {
+  position: fixed;
+  right: 35px;
+  top: 125px;
+    width: 150px;
+}
+
+.btn-kyoob {
+        color: #fff;
+    width: 100%;
+    margin-top: 0 !important;
+}
+
+.info-right-fix {
+    font-size: 12px;
+}
+
+.btn-kyoob-purple {
+    background-color: #b261b7;
+}
+
+.btn-kyoob-pink {
+    background-color: #dd679d;
+}
+
+.fa-eye-slash.btn {
+    border: none;
+    outline: none;
+    box-shadow: none
+}
+
+a {
+    text-decoration: none;
+    color: #400485;
+    font-weight: 700
+}
+
+a:hover {
+    text-decoration: none;
+    color: #7b4ca0
+}
+
+.option {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer
+}
+
+.option label.text-muted {
+    display: block;
+    cursor: pointer
+}
+
+.option input {
+    display: none
+}
+
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer
+}
+
+.option input:checked~.checkmark:after {
+    display: block
+}
+
+.option .checkmark:after {
+    content: "";
+    width: 13px;
+    height: 13px;
+    display: block;
+    background: #400485;
+    position: absolute;
+    top: 48%;
+    left: 53%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 300ms ease-in-out 0s
+}
+
+.option input[type="radio"]:checked~.checkmark {
+    background: #fff;
+    transition: 300ms ease-in-out 0s;
+    border: 1px solid #400485
+}
+
+.option input[type="radio"]:checked~.checkmark:after {
+    transform: translate(-50%, -50%) scale(1)
+}
+
+.btn.btn-block {
+    border-radius: 20px;
+    background-color: #b261b7;
+    font-family: 'Maven Pro', sans-serif;
+    color: #fff
+}
+
+.btn.btn-block:hover {
+    background-color: #55268be0
+}
+
+@media(max-width: 575px) {
+    .wrapper {
+        margin: 10px
+    }
+}
+
+@media(max-width:424px) {
+    .wrapper {
+        padding: 30px 10px;
+        margin: 5px
+    }
+
+    .option {
+        position: relative;
+        padding-left: 22px
+    }
+
+    .option label.text-muted {
+        font-size: 0.95rem
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 2px
+    }
+
+    .option .checkmark:after {
+        top: 50%
+    }
+
+    #forgot {
+        font-size: 0.95rem
+    }
+}
+.bottom-fix {
+    text-align: center;
+    bottom: 0;
+}
