@@ -8,7 +8,7 @@ class AuthModel extends CI_Model {
 	public function loginAuth($params){
 		$password = md5($params['password']);
 
-		$data = $this->db->get_where("users", array("email" => $params['email'], "password" => $password, "status" => '1'))->row();
+		$data = $this->db->get_where("master_users", array("email" => $params['email'], "password" => $password, "status" => '1'))->row();
 
 		return $data;		
 	}

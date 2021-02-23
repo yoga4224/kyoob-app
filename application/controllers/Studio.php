@@ -22,7 +22,7 @@ class Studio extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		
+		LoggedSystem();
         //$this->load->model('Komparase_Model');
 
 	}
@@ -30,7 +30,7 @@ class Studio extends CI_Controller {
 	public function index($kat='smartphone')
 	{
         
-        $this->load->view('public/' . $mobile_dect . '/template/footer');
+        // $this->load->view('public/' . $mobile_dect . '/template/footer');
     }
     
         

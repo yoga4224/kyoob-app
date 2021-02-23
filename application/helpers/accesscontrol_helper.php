@@ -6,7 +6,7 @@ function LoggedSystem()
  	$logged = $CI->session->userdata('userLogged');
  	
  	if(!$logged){
- 		redirect("/authentication/login");
+ 		redirect("/login");
  	}
  	else
  		return true;

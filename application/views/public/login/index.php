@@ -26,14 +26,14 @@
     <div class="text-center pt-2 ttl-login f500">Welcome to Kyoob Studio</div>
     <div class="text-center sub-login">The easiest way to create cool ads for your campaign</div>
         
-    <form class="pt-3">
+    <form method="POST" action="<?=base_url()?>login" class="pt-3">
         <div class="form-group py-2">
-            <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" placeholder="Username or Email Address" required class=""> </div>
+            <div class="input-field"> <span class="far fa-user p-2"></span> <input type="text" placeholder="Username or Email Address" required class="" name="email"> </div>
         </div>
         <div class="form-group py-1 pb-2">
-            <div class="input-field"> <span class="fas fa-lock p-2"></span> <input type="password" placeholder="Enter your Password" required class=""></div>
+            <div class="input-field"> <span class="fas fa-lock p-2"></span> <input type="password" placeholder="Enter your Password" required class="" name="password"></div>
         </div>
-        <button class="btn btn-block text-center my-3 btn-kyoob-purple">Log in</button>
+        <button class="btn btn-block text-center my-3 btn-kyoob-purple" type="submit" >Log in</button>
         
     </form>
         </div>

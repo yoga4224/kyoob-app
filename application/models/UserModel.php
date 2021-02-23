@@ -25,17 +25,18 @@ class UserModel extends CI_Model {
 
 	public function upsertUser($params){
 		$this->load->library('s3_upload');
-		$userImage = uploadImage('userImage', './assets/temp');
+		// $userImage = uploadImage('userImage', './assets/temp');
+		$userImage = uploadImage('userImage', './assets/users/'.uniqid());
 
 		if(!empty($params['password']))
 			$this->db->set("password",md5($params['password']));
 		
-		$url_image = "";
-		if(!empty($userImage['file']['file_name'])){
-			$file_url = $this->s3_upload->upload_file($userImage['file']['full_path'], 'users/');
-			$url_image = "https://amazonaws.com/users/".$file_url['name'];
-			$this->db->set("image",$url_image);
-		}
+		// $url_image = "";
+		// if(!empty($userImage['file']['file_name'])){
+		// 	$file_url = $this->s3_upload->upload_file($userImage['file']['full_path'], 'users/');
+		// 	$url_image = "https://amazonaws.com/users/".$file_url['name'];
+		// 	$this->db->set("image",$url_image);
+		// }
 
 		$this->db->set("email",$params['email']);
 		$this->db->set("first_name",$params['first_name']);

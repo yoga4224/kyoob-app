@@ -2,35 +2,45 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
     
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
-		
-
 	}
 	
 	public function index()
 	{
-        
-        $this->load->view('public/login/index');
-    }
+		if($this->session->userdata('userLogged'))
+			redirect("/studio");
+
+		$this->load->model('AuthModel');	
+
+		if($_POST)
+		{
+			$params = $this->input->post();
+			$data = $this->AuthModel->loginAuth($params);
+
+            if(!empty($data)){
+                $session = array(
+                        'userLogged' => TRUE,
+                        'userId' => $data->id,
+                        'fullName' => $data->first_name." ".$data->last_name
+                );
     
-        
+                $this->session->set_userdata($session);
+                redirect("/studio");
+            }else{
+                redirect("/login");
+            }	
+		}else{
+            $this->load->view('public/login/index');
+		}
+	}
+
+	public function logout(){
+		$this->load->helper('accesscontrol');
+		LoggedSystem();
+
+		$this->session->sess_destroy();
+		redirect("/login");
+	} 
 }
