@@ -27,10 +27,13 @@ class Studio extends CI_Controller {
 
 	}
 	
-	public function index($kat='smartphone')
+	public function index()
 	{
         
-        $this->load->view('public/' . $mobile_dect . '/template/footer');
+        $this->load->view('public/template/header');
+        $this->load->view('public/main/homepage');
+        $this->load->view('public/template/footer');
+        
     }
     
         

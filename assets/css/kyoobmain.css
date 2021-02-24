@@ -2,18 +2,51 @@
     DEMO STYLE
 */
 
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    background-color: #eaeef0;
+    background-image: url(../images/headerbg.png);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Maven Pro', sans-serif;
+    color: #263646;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Maven Pro', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+    
+}
+
+.btn-kyoob {
+        color: #fff;
+    width: 100%;
+    margin-top: 0 !important;
+}
+
+.info-right-fix {
+    font-size: 12px;
+}
+
+.btn-kyoob-purple {
+    background-color: #b261b7;
+}
+
+.btn-kyoob-pink {
+    background-color: #dd679d;
+}
+
+.header_purple {
+    background-color: #dd679d;
+    color: #fff;
+    
+    padding: 10px;
+    font-family: 'Maven Pro', sans-serif;
+    font-size: 19px;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
 }
 
 a,
@@ -25,12 +58,12 @@ a:focus {
 }
 
 .navbar {
-    padding: 15px 10px;
+    padding: 20px 20px;
     background: #fff;
     border: none;
-    border-radius: 0;
+    border-radius: 10px;
     margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 8px 12px 24px rgb(221 103 157 / 22%);
 }
 
 .navbar-btn {
@@ -39,11 +72,25 @@ a:focus {
     border: none;
 }
 
+.val-card {
+    text-align: center;
+    font-size: 35px;
+}
+
+.sub-val-card {
+    text-align: center;
+    font-size: 14px;
+}
+
 .line {
     width: 100%;
     height: 1px;
     border-bottom: 1px dashed #ddd;
     margin: 40px 0;
+}
+
+.mb-0 {
+    margin-bottom: 0;
 }
 
 /* ---------------------------------------------------
@@ -59,12 +106,12 @@ a:focus {
     width: 250px;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 10px;
     height: 100vh;
     z-index: 999;
-    background: #7386D5;
-    color: #fff;
+    color: #263646;
     transition: all 0.3s;
+    font-family: 'Maven Pro', sans-serif;
 }
 
 #sidebar.active {
@@ -73,12 +120,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    
 }
 
 #sidebar ul p {
@@ -93,14 +140,16 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: #dd679d;
     background: #fff;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
+    
+    border-bottom: 2px solid;
+    border-color: #dd679d;
+    
 }
 
 a[data-toggle="collapse"] {
@@ -161,6 +210,29 @@ a.article:hover {
 #content.active {
     width: 100%;
 }
+
+.shadow-pink {
+    box-shadow: 8px 12px 24px rgb(221 103 157 / 22%);
+}
+
+
+.welcome-acc {
+    font-size: 18px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.pt-7 {
+    padding-top: 7px;
+}
+
+
 
 /* ---------------------------------------------------
     MEDIAQUERIES
