@@ -22,7 +22,7 @@ class Studio extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		
+		LoggedSystem();
         //$this->load->model('Komparase_Model');
 
 	}
