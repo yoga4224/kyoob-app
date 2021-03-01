@@ -26,9 +26,17 @@ class Main extends CI_Controller {
                 ];
 
         $string = str_replace($from,$to,$string);
-        $name = 'index.html';
 
-        $this->zip->add_data($name, $string);
+        $data = array(
+                'index.html'        => $string,
+                'avatar.jpg'        => read_file(base_url()."assets/template/wuling/avatar.jpg"),
+                'avatarlink.png'    => read_file(base_url()."assets/template/wuling/avatarlink.png"),
+                'banner.jpg'        => read_file(base_url()."assets/template/wuling/banner.jpg"),
+                'bluecheck.png'     => read_file(base_url()."assets/template/wuling/bluecheck.png"),
+                'postimage.jpg'     => read_file(base_url()."assets/template/wuling/postimage.jpg")
+        );
+
+        $this->zip->add_data($data);
         $this->zip->download('wuling.zip');
     }
 }
