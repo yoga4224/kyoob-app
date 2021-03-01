@@ -64,11 +64,17 @@
                 <li>
                     <a href="#">Showcase</a>
                 </li>
-                <li>
-                    <a href="#">User Profile</a>
+                <?php 
+                    if (($this->uri->segment(1)) == 'User'){
+                        echo '<li class="active">';
+                    }else{
+                        echo '<li>';
+                    }
+                 ?>
+                    <a href="<?=base_url('User');?>">User Profile</a>
                 </li>
                 <li>
-                    <a href="#">Log Out</a>
+                    <a href="<?=base_url('Login/logout');?>">Log Out</a>
                 </li>
 
             </ul>

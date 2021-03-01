@@ -73,6 +73,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Campaign Name</th>
+                                    <th scope="col">Creative Name</th>
+                                    
                                     <th scope="col">Format</th>
                                     <th scope="col">Dimension</th>
                                     <th scope="col">Imp Served</th>
@@ -83,12 +85,15 @@
                             <tbody>
                                 <tr>
                                     <td>Lorem Ipsum Dolor Sit Amet</td>
+                                    <td>Lorem Ipsum Dolor Sit Amet</td>
+                                    
                                     <td>Social Ads</td>
                                     <td>300x600</td>
                                     <td>300.000</td>
                                     <td>350.000</td>
                                 </tr>
                                 <tr>
+                                    <td>Lorem Ipsum Dolor Sit Amet</td>
                                     <td>Lorem Ipsum Dolor Sit Amet</td>
                                     <td>Social Ads</td>
                                     <td>300x600</td>
@@ -97,12 +102,6 @@
                                 </tr>
                                 <tr>
                                     <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Social Ads</td>
-                                    <td>300x600</td>
-                                    <td>300.000</td>
-                                    <td>350.000</td>
-                                </tr>
-                                <tr>
                                     <td>Lorem Ipsum Dolor Sit Amet</td>
                                     <td>Social Ads</td>
                                     <td>300x600</td>
@@ -110,6 +109,15 @@
                                     <td>350.000</td>
                                 </tr>
                                 <tr>
+                                    <td>Lorem Ipsum Dolor Sit Amet</td>
+                                    <td>Lorem Ipsum Dolor Sit Amet</td>
+                                    <td>Social Ads</td>
+                                    <td>300x600</td>
+                                    <td>300.000</td>
+                                    <td>350.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Lorem Ipsum Dolor Sit Amet</td>
                                     <td>Lorem Ipsum Dolor Sit Amet</td>
                                     <td>Social Ads</td>
                                     <td>300x600</td>
