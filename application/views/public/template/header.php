@@ -119,7 +119,7 @@
                             <div class="row">
                             <div class="col-lg-10 text-right">
                                     
-                                <div class="text-right fs-18">Welcome Admin,</div>
+                                <div class="text-right fs-18">Welcome <?= $_SESSION['fullName'] ?>,</div>
                                 </div>
                                 <div class="col-2"><img class="img-fluid float-right" src="<?=base_url()?>assets/images/avatar.png"></div>
                             </div>
