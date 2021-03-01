@@ -52,8 +52,14 @@
                  ?>
                     <a href="<?=base_url('Workspace')?>">My Workspace</a>
                 </li>
-                <li>
-                    <a href="#">Template Ads</a>
+                <?php 
+                    if (($this->uri->segment(1)) == 'Create'){
+                        echo '<li class="active">';
+                    }else{
+                        echo '<li>';
+                    }
+                 ?>
+                    <a href="<?=base_url('Create');?>">Template Ads</a>
                 </li>
                 <li>
                     <a href="#">Showcase</a>

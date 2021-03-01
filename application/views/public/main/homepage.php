@@ -126,7 +126,7 @@
 
         </div>
         <div class="col-lg-2">
-            <button class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Request a Demo</button><br>
+            <a href='<?=base_url('create')?>'><button class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Create Ads</button></a><br>
             <button class="btn btn-kyoob text-center my-4 btn-kyoob-pink">Contact Us</button>
             <p class="info-right-fix">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
