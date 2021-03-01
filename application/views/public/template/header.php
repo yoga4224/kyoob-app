@@ -34,11 +34,23 @@
 
             <ul class="list-unstyled components">
 
-                <li class="active">
-                    <a href="#">Overview</a>
+                <?php 
+                    if (($this->uri->segment(1)) == 'studio'){
+                        echo '<li class="active">';
+                    }else{
+                        echo '<li>';
+                    }
+                 ?>
+                    <a href="<?=base_url();?>">Overview</a>
                 </li>
-                <li>
-                    <a href="#">My Workspace</a>
+                <?php 
+                    if (($this->uri->segment(1)) == 'Workspace'){
+                        echo '<li class="active">';
+                    }else{
+                        echo '<li>';
+                    }
+                 ?>
+                    <a href="<?=base_url('Workspace')?>">My Workspace</a>
                 </li>
                 <li>
                     <a href="#">Template Ads</a>

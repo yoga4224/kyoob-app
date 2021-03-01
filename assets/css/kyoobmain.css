@@ -265,7 +265,10 @@ a.article:hover {
 }
 
 
-
+.wkspace-card {
+    display: inline-block !important;
+    margin: 2px;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
