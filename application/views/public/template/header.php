@@ -62,7 +62,7 @@
                     <a href="<?=base_url('Create');?>">Template Ads</a>
                 </li>
                 <li>
-                    <a href="#">Showcase</a>
+                    <a href="https://kyoob-ads.com/" target="_blank">Showcase</a>
                 </li>
                 <?php 
                     if (($this->uri->segment(1)) == 'User'){
