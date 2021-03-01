@@ -74,7 +74,6 @@
                                 <tr>
                                     <th scope="col">Campaign Name</th>
                                     <th scope="col">Creative Name</th>
-                                    
                                     <th scope="col">Format</th>
                                     <th scope="col">Dimension</th>
                                     <th scope="col">Imp Served</th>
@@ -83,48 +82,16 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach($data as $row){ ?>
                                 <tr>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    
-                                    <td>Social Ads</td>
-                                    <td>300x600</td>
-                                    <td>300.000</td>
-                                    <td>350.000</td>
+                                    <td><?= $row->campaign_name ?></td>
+                                    <td><?= $row->creative_name ?></td>
+                                    <td><?= $row->template_name ?></td>
+                                    <td><?= $row->width.'x'.$row->height ?></td>
+                                    <td><?= $row->impressions ?></td>
+                                    <td><?= $row->impressions+50000 ?></td>
                                 </tr>
-                                <tr>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Social Ads</td>
-                                    <td>300x600</td>
-                                    <td>300.000</td>
-                                    <td>350.000</td>
-                                </tr>
-                                <tr>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Social Ads</td>
-                                    <td>300x600</td>
-                                    <td>300.000</td>
-                                    <td>350.000</td>
-                                </tr>
-                                <tr>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Social Ads</td>
-                                    <td>300x600</td>
-                                    <td>300.000</td>
-                                    <td>350.000</td>
-                                </tr>
-                                <tr>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Lorem Ipsum Dolor Sit Amet</td>
-                                    <td>Social Ads</td>
-                                    <td>300x600</td>
-                                    <td>300.000</td>
-                                    <td>350.000</td>
-                                </tr>
-
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

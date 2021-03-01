@@ -22,6 +22,7 @@ class Studio extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('StudioModel');
 		LoggedSystem();
         //$this->load->model('Komparase_Model');
 
@@ -29,8 +30,9 @@ class Studio extends CI_Controller {
 	
 	public function index()
 	{
-        
-        $this->load->view('public/template/header');
+        $this->container["data"] = $this->StudioModel->getCreative();
+
+        $this->load->view('public/template/header', $this->container);
         $this->load->view('public/main/homepage');
         $this->load->view('public/template/footer');
         
