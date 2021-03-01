@@ -13,96 +13,21 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        
                             <div class="card wkspace-card" style="width: 18rem;">
-                                
                                 <div class="card-body">
-                                    
-                                    <p class="card-text">Velo Awareness Campaign</p>
-                                    <p class="card-text">300x250</p>
-                                    <p class="card-text">Template Social Ads</p>
-                                    
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Cras justo odio</li>
-                                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                                    <li class="list-group-item">Vestibulum at eros</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
+                                    <a href="<?=base_url('main/preview')?>" target="_blank"><img src="<?=base_url()?>assets/dummy/myworks.jpg"></a>
                                 </div>
                             </div>
-
-<div class="card wkspace-card" style="width: 18rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
+                            <div class="card wkspace-card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Cras justo odio</li>
-                                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                                    <li class="list-group-item">Vestibulum at eros</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
+                                    <a href="<?=base_url('main/download')?>" target="_blank"><img src="<?=base_url()?>assets/dummy/myworks2.jpg"></a>
                                 </div>
                             </div>
-
-<div class="card wkspace-card" style="width: 18rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
+                            <div class="card wkspace-card" style="width: 18rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Cras justo odio</li>
-                                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                                    <li class="list-group-item">Vestibulum at eros</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
+                                    <a href="#"><img src="<?=base_url()?>assets/dummy/myworks2.jpg"></a>
                                 </div>
                             </div>
-
-<div class="card wkspace-card" style="width: 18rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Cras justo odio</li>
-                                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                                    <li class="list-group-item">Vestibulum at eros</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div>
-
-<div class="card wkspace-card" style="width: 18rem;">
-                                <img class="card-img-top" src="..." alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Cras justo odio</li>
-                                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                                    <li class="list-group-item">Vestibulum at eros</li>
-                                </ul>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div>
-
-
                         
                     </div>
                 </div>
@@ -113,7 +38,7 @@
 
         </div>
         <div class="col-lg-2">
-            <button class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Request a Demo</button><br>
+            <a href="<?=base_url('create')?>"><button class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Create Ads</button></a><br>
             <button class="btn btn-kyoob text-center my-4 btn-kyoob-pink">Contact Us</button>
             <p class="info-right-fix">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

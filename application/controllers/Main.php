@@ -31,4 +31,14 @@ class Main extends CI_Controller {
         $this->zip->add_data($name, $string);
         $this->zip->download('wuling.zip');
     }
+    
+    public function download(){
+        redirect(base_url() . "assets/template/demo/kyoob_demo_3dcube.zip");
+    }
+    
+    public function preview(){
+        
+        $this->load->view('public/demo/demo/index');
+        
+    }
 }

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8">
+    <title></title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/hammer.min.js"></script>
+    <script src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+    
+<link rel="stylesheet" href="css/swiper.min.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <style media="screen">
+      
+     
+    </style>
+    <div id="container">
+      
+      <div id="swipeBanner">
+<!-- 3D Swipe -->
+<div class="swiper-container" id="3d-swipe">
+
+  <!-- Swipe instructions that disappear upon interaction -->
+  
+       
+  <!-- Frames container -->
+  <div  class="swiper-wrapper">
+    
+    <!-- Frame 01 -->
+    <div class="swiper-slide frame01">
+      <div id='htp1' class="hotspot"></div>
+      <a>
+        <img class="frames" src="face1.jpg">
+      </a>
+    </div>
+
+    <!-- Frame 02 -->
+    <div class="swiper-slide frame02">
+        <div id='htp2' class="hotspot"></div>
+      <a>
+        <img class="frames" src="face2.jpg">
+      </a>
+    </div>
+
+    <!-- Frame 03 -->
+    <div class="swiper-slide frame04">
+        <div id='htp3' class="hotspot"></div>
+      <a>
+        <img class="frames" src="face3.jpg">
+      </a>
+        
+    </div>
+    <!-- Frame 04 -->
+    <div class="swiper-slide frame03">
+        <div id='htp4' class="hotspot"></div>
+      <a>
+        <img class="frames" src="face4.jpg">
+      </a>
+        
+    </div>
+    
+
+  </div><!-- End of Frames container -->
+
+</div><!-- End of 3D Swipe -->
+      </div>
+    </div>
+<script src="js/swiper.min.js"></script>
+<script type="text/javascript">
+var framesAmount = $('.swiper-slide').length - 1;
+var count = 3;
+
+        
+window.onload = function() {
+  if (Enabler.isInitialized()) {
+    enablerInitHandler();
+  } else {
+    Enabler.addEventListener(studio.events.StudioEvent.INIT, enablerInitHandler);
+  }
+}
+
+function enablerInitHandler() {
+    initSwiper();
+}
+
+// Initialize the Swiper
+function initSwiper(){
+  var swiper = new Swiper('.swiper-container', {
+    effect: 'cube',
+    loop: true,
+    grabCursor: true,
+    cubeEffect: {
+        shadow: true,
+        slideShadows: true,
+        shadowOffset: 20,
+        shadowScale: 0.94,
+      },
+    // Spin animation using plugin's autoplay
+    autoplay: '3000',
+    autoplayDisableOnInteraction:true,
+    
+
+    // When spin animation finishes, swipe back to the first frame
+    onAutoplayStop(swiper){
+      
+    }
+  });
+}
+        
+document.getElementById('htp1').addEventListener('click', faceclick);
+document.getElementById('htp2').addEventListener('click', faceclick);
+document.getElementById('htp3').addEventListener('click', faceclick);
+document.getElementById('htp4').addEventListener('click', faceclick);
+
+function faceclick(e){
+    switch (e.target.id){
+        case 'htp1':
+            window.open('http://kyoob.id', '_BLANK');
+            break;
+        case 'htp2':
+            window.open('http://kyoob.id', '_BLANK');
+            break;
+        case 'htp3':
+            window.open('http://kyoob.id', '_BLANK');
+            break;
+        case 'htp4':
+            window.open('http://kyoob.id', '_BLANK');
+            break;
+    }
+}   
+    </script>
+  </body>
+</html>
