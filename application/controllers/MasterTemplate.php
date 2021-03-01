@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class MasterTemplate extends CI_Controller {
 
 	private $container;
 
@@ -11,7 +11,7 @@ class User extends CI_Controller {
 
 		$this->container['data'] = null;
 		$this->load->helper('url');
-		$this->load->model('UserModel');
+		$this->load->model('MasterTemplateModel');
 		LoggedSystem();
 
 		// $this->container['fullName'] = $this->session->userdata('fullName');
@@ -20,21 +20,21 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		$this->container["data"] = $this->UserModel->getUser();
+		$this->container["data"] = $this->MasterTemplateModel->getMasterTemplate();
         $this->load->view('public/template/header', $this->container);
-        $this->load->view('public/user/list');
+        $this->load->view('public/masterTemplate/list');
         $this->load->view('public/template/footer');
 	}
 
 	public function upsert($id = null){
-		$form_title = "Form Input User";
-		// $this->container["data"]["image"] = "http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image";
+		$form_title = "Form Input MasterTemplate";
+		$this->container["image"] = "http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image";
 
 		if($_POST){
 			$params = $this->input->post();
 
 			$params['userLog'] = $this->session->userdata('userId');
-			$data = $this->UserModel->upsertUser($params);
+			$data = $this->MasterTemplateModel->upsertMasterTemplate($params);
 
             if($data){
                 // $this->session->set_flashdata(array("type" => "success", "msg" => "save data successfully!"));
@@ -42,25 +42,25 @@ class User extends CI_Controller {
                 // $this->session->set_flashdata(array("type" => "warning", "msg" => "save data filed!"));
             }
 
-			redirect('/user');
+			redirect('/masterTemplate');
 		}
 		else{
 			if(!empty($id)){
-				$form_title = "Form Update User";
-				$this->container["data"] = $this->UserModel->getUserById($id);
+				$form_title = "Form Update MasterTemplate";
+				$this->container["data"] = $this->MasterTemplateModel->getMasterTemplateById($id);
+				$this->container["image"] = base_url()."assets/images/icon_template/".$this->container["data"]->icon_template;
 			}
 			$this->container['form_title'] = $form_title;
 			$this->container['id'] = $id;
-			$this->container['account'] = $this->UserModel->getAccount();
 			
             $this->load->view('public/template/header', $this->container);
-            $this->load->view('public/user/form');
+            $this->load->view('public/masterTemplate/form');
             $this->load->view('public/template/footer');
 		}
 	}
 
 	public function delete($id){
-		$data = $this->UserModel->deleteUser($id);
+		$data = $this->MasterTemplateModel->deleteMasterTemplate($id);
 
 		if($data){
             // $this->session->set_flashdata(array("type" => "success", "msg" => "delete data successfully!"));
@@ -68,6 +68,6 @@ class User extends CI_Controller {
             // $this->session->set_flashdata(array("type" => "warning", "msg" => "delete data filed!"));
         }
 
-		redirect('/user');
+		redirect('/mastertemplate');
 	}
 }

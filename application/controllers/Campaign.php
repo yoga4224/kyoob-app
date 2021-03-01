@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class Campaign extends CI_Controller {
 
 	private $container;
 
@@ -11,7 +11,7 @@ class User extends CI_Controller {
 
 		$this->container['data'] = null;
 		$this->load->helper('url');
-		$this->load->model('UserModel');
+		$this->load->model('CampaignModel');
 		LoggedSystem();
 
 		// $this->container['fullName'] = $this->session->userdata('fullName');
@@ -20,21 +20,21 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		$this->container["data"] = $this->UserModel->getUser();
+		$this->container["data"] = $this->CampaignModel->getCampaign();
         $this->load->view('public/template/header', $this->container);
-        $this->load->view('public/user/list');
+        $this->load->view('public/campaign/list');
         $this->load->view('public/template/footer');
 	}
 
 	public function upsert($id = null){
-		$form_title = "Form Input User";
+		$form_title = "Form Input Campaign";
 		// $this->container["data"]["image"] = "http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image";
 
 		if($_POST){
 			$params = $this->input->post();
 
 			$params['userLog'] = $this->session->userdata('userId');
-			$data = $this->UserModel->upsertUser($params);
+			$data = $this->CampaignModel->upsertCampaign($params);
 
             if($data){
                 // $this->session->set_flashdata(array("type" => "success", "msg" => "save data successfully!"));
@@ -42,32 +42,32 @@ class User extends CI_Controller {
                 // $this->session->set_flashdata(array("type" => "warning", "msg" => "save data filed!"));
             }
 
-			redirect('/user');
+			redirect('/campaign');
 		}
 		else{
 			if(!empty($id)){
-				$form_title = "Form Update User";
-				$this->container["data"] = $this->UserModel->getUserById($id);
+				$form_title = "Form Update Campaign";
+				$this->container["data"] = $this->CampaignModel->getCampaignById($id);
 			}
+			$this->container['account'] = $this->CampaignModel->getAccount();
 			$this->container['form_title'] = $form_title;
 			$this->container['id'] = $id;
-			$this->container['account'] = $this->UserModel->getAccount();
 			
             $this->load->view('public/template/header', $this->container);
-            $this->load->view('public/user/form');
+            $this->load->view('public/campaign/form');
             $this->load->view('public/template/footer');
 		}
 	}
 
-	public function delete($id){
-		$data = $this->UserModel->deleteUser($id);
+	public function enableCampaign($id){
+		$data = $this->CampaignModel->enableCampaign($id);
 
 		if($data){
-            // $this->session->set_flashdata(array("type" => "success", "msg" => "delete data successfully!"));
+            // $this->session->set_flashdata(array("type" => "success", "msg" => "enable campaign successfully!"));
         }else{
-            // $this->session->set_flashdata(array("type" => "warning", "msg" => "delete data filed!"));
+            // $this->session->set_flashdata(array("type" => "warning", "msg" => "enable campaign filed!"));
         }
 
-		redirect('/user');
+		redirect('/campaign');
 	}
 }
