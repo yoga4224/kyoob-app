@@ -41,7 +41,7 @@
     
     <div class="right-fix">
         <div class="fixed-right-request">
-         <button class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Request a Demo</button><br>
+         
          <button class="btn btn-kyoob text-center my-4 btn-kyoob-pink">Contact Us</button>
             
          <p class="info-right-fix">

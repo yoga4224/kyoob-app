@@ -175,6 +175,7 @@ a:hover {
     display: block
 }
 
+
 .option .checkmark:after {
     content: "";
     width: 13px;
