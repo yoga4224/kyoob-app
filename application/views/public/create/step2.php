@@ -6,6 +6,7 @@
 <script src="<?=base_url()?>assets/js/template_ads/3dcube/hammer.min.js"></script>
 <script src="<?=base_url()?>assets/js/template_ads/3dcube/swiper.min.js"></script>
 
+
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
@@ -85,7 +86,9 @@
                                 <div class="swiper-slide frame01">
                                     <div id='htp1' class="hotspot"></div>
                                     <a>
-                                        <img class="frames" id='fc1' src="<?=base_url()?>assets/dummy/face1.jpg">
+                                        <img class="frames" id='fc1' src="">
+                                        <img class="frames" id='fc1x' src="">
+                                        
                                     </a>
                                 </div>
 
@@ -93,7 +96,7 @@
                                 <div class="swiper-slide frame02">
                                     <div id='htp2' class="hotspot"></div>
                                     <a>
-                                        <img class="frames" id='fc2' src="<?=base_url()?>assets/dummy/noimage.jpg">
+                                        <img class="frames" id='fc2' src="">
                                     </a>
                                 </div>
 
@@ -101,14 +104,14 @@
                                 <div class="swiper-slide frame03">
                                     <div id='htp3' class="hotspot"></div>
                                     <a>
-                                        <img class="frames" id='fc3' src="<?=base_url()?>assets/dummy/noimage.jpg">
+                                        <img class="frames" id='fc3' src="">
                                     </a>
                                 </div>
                                 <!-- Frame 04 -->
                                 <div class="swiper-slide frame03">
                                     <div id='htp4' class="hotspot"></div>
                                     <a>
-                                        <img class="frames" id='fc4' src="<?=base_url()?>assets/dummy/face4.jpg">
+                                        <img class="frames" id='fc4' src="">
                                     </a>
 
                                 </div>
@@ -135,36 +138,42 @@
     
 var framesAmount = $('.swiper-slide').length - 1;
 var count = 3;
-
+var myswiper;
+var fcpath1 = '<?=base_url()?>assets/dummy/noimage.jpg';
+var fcpath2 = '<?=base_url()?>assets/dummy/noimage.jpg';
+var fcpath3 = '<?=base_url()?>assets/dummy/noimage.jpg';
+var fcpath4 = '<?=base_url()?>assets/dummy/noimage.jpg';
+    
 // Initialize the Swiper
 
-  var myswiper = new Swiper('.swiper-container', {
+initmore();
+function initmore(){
+    console.log(fcpath1);
+    console.log('init more');
+    
+    document.getElementById('fc1').src = fcpath1;
+    document.getElementById('fc2').src = fcpath2;
+    document.getElementById('fc3').src = fcpath3;
+    document.getElementById('fc4').src = fcpath4;
+    initSwiper(); 
+}
+    
+function initSwiper(){
+    
+    myswiper = new Swiper('.swiper-container', {
       effect: 'cube',
       loop: true,
-      lazy: {
-        threshold: 50,
-        observer: true,
-        loadPrevNext: true,
-        loadPrevNextAmount: 2,
-      },
+      speed: 800,
       grabCursor: true,
       direction: 'horizontal',
-      cubeEffect: {
-        shadow: true,
-        slideShadows: true,
-        shadowOffset: 20,
-        shadowScale: 0.94,
-      },
-    // Spin animation using plugin's autoplay
-    autoplay: '3000',
+      loopedSlides:2,
+      slidesPerView:'auto',
+    autoplay: '1000',
     autoplayDisableOnInteraction:true,
-    centeredSlides: true,
+  });
 
-    // When spin animation finishes, swipe back to the first frame
-    onAutoplayStop(myswiper){
-      
-    }
-  })
+//myswiper.slideTo( 4, 100, false)
+}
 
 function filechanged3(){
     var selectedFile = document.getElementById('face3').files[0];    
@@ -172,10 +181,12 @@ function filechanged3(){
 
     var reader = new FileReader();
     reader.onload = function() {
-        img.src = this.result   
+        fcpath3 = this.result;
+        myswiper.destroy(false, true);
+        initmore();
     }
     reader.readAsDataURL(selectedFile);
-    myswiper.update();
+    
 }
     
     
@@ -185,10 +196,12 @@ function filechanged4(){
 
     var reader = new FileReader();
     reader.onload = function() {
-        img.src = this.result;
+        fcpath4 = this.result;
+        myswiper.destroy(false, true);
+        initmore();
     }
     reader.readAsDataURL(selectedFile);
-    myswiper.update();
+    
 }
     
     
@@ -199,25 +212,38 @@ function filechanged2(){
 
     var reader = new FileReader();
     reader.onload = function() {
-        img.src = this.result    
+        fcpath2 = this.result;
+        myswiper.destroy(false, true);
+        initmore();  
     }
     reader.readAsDataURL(selectedFile);
-    myswiper.update();
+    
+}
+   
+function filechanged() {
+    var selectedFile = document.getElementById('face1').files[0];    
+    var img = document.getElementById('fc1');
+
+    var reader = new FileReader();
+    reader.onload = function() {
+        fcpath1 = this.result;
+        myswiper.destroy(false, true);
+        initmore();
+    }
+    
+    reader.readAsDataURL(selectedFile);
+    
 }
     
-function filechanged() {
-        var selectedFile = document.getElementById('face1').files[0];
-        
-        var img = document.getElementById('fc1');
-        
-        var reader = new FileReader();
-        reader.onload = function() {
-            img.src = this.result;
-        }
-        reader.readAsDataURL(selectedFile);
-        myswiper.update();
+function filechangedx(){
+    var swiperWrapper = $('.swiper-container'),
+    newSlides = $('.swiper-wrapper').children('.swiper-slide').clone(true);
 
-    }
+    myswiper.destroy();
+    swiperWrapper.empty().append(newSlides);
+    $('.swiper-wrapper').attr('style', '');
+    myswiper = new Swiper('.swiper-container', settings);
+}
     
         
 document.getElementById('htp1').addEventListener('click', faceclick);
