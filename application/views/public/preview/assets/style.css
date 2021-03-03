@@ -1,0 +1,87 @@
+/************ 
+TAG STYLES
+************/
+html, body
+{
+	margin: 0;
+	height: 100%;
+}
+
+body
+{
+	color: white;
+	font-size: 12px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+button
+{
+	user-select: none;
+	cursor: pointer;
+	color: white;
+	border: none;
+	background-color: #0068ff;
+	outline: none;
+	height: 30px;
+	width: 110px;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+strong
+{
+	font-weight: bold;
+}
+
+/************************
+CREATIVE CONTENT STYLES
+************************/
+#container
+{
+	position: relative;
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	background-color: #bacae4; 
+	box-sizing: border-box;
+	height: 1px;
+	width: 1px;
+}
+
+#banner-content
+{
+	height: 100%;
+	width: 100%;
+	background-position: 10px 10px;
+	background-color: white;
+	background-image: url("../images/logo.png");
+	background-repeat: no-repeat;
+}
+
+#expand-button
+{
+	margin: auto;
+	top: 0;
+	bottom: 0; 
+	width: 80px;
+	right: 40px; 
+	position: absolute;
+}
+
+#close-ad-button
+{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 26px;
+	height: 26px;
+}
+
+.label
+{
+	color: #0D2A4D;
+	font-size: 14px;
+	position: absolute;
+	margin-left: 10px;
+	top: 65px;
+}

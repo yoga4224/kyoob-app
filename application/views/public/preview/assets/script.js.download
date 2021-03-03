@@ -1,0 +1,41 @@
+/*******************
+VARIABLES
+*******************/
+var creativeVersion = "1.1.0"; // format versioning code, please do not alter or remove this variable
+var creativeLastModified = "2016-06-29";
+
+/*******************
+INITIALIZATION
+*******************/
+function checkIfEBInitialized(event)
+{
+	if(!EB.isInitialized())
+	{
+		EB.addEventListener(EBG.EventName.EB_INITIALIZED, initializeCreative);
+	}
+	else
+	{
+		initializeCreative();
+	}
+}
+
+function initializeCreative()
+{
+	setCreativeVersion(); // format versioning code, please do not alter or remove this function
+}
+
+/*******************
+VERSIONING
+*******************/
+/* format versioning code starts, please do not alter or remove these functions */
+function setCreativeVersion()
+{
+	EB._sendMessage("setCreativeVersion", {
+		creativeVersion: creativeVersion,
+		creativeLastModified: creativeLastModified
+	});
+}
+
+
+/* format versioning code ends, please do not alter or remove these functions */
+window.addEventListener("load", checkIfEBInitialized);

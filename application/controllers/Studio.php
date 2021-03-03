@@ -24,7 +24,6 @@ class Studio extends CI_Controller {
 		parent::__construct();
 		$this->load->model('StudioModel');
 		LoggedSystem();
-        //$this->load->model('Komparase_Model');
 
 	}
 	

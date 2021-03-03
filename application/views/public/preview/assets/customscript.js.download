@@ -1,0 +1,665 @@
+/*   Author: 	Custom Format Group  */
+
+window.ebO && ebO.extensionHooks && ebO.extensionHooks.push(function (adConfig) {
+	"use strict";
+
+	//=================================================
+	// Variables
+	//-------------------------------------------------
+	
+	var scriptName		= "PL_HTML5Adhesion_CFV_1_1_0";
+	var scriptVersion	= "1.1.0";
+	var lastModified	= "2016-06-07";
+	var lastUploaded	= "2016-06-07";
+
+	var templateVersion = "2.0.17";
+	var isDebug = false;
+
+	var adId = adConfig.adId;
+	var rnd = adConfig.rnd;	
+	var uid = adConfig.uid;
+	var self;
+	var ad;
+	var os;
+	var browser;
+	var showbanner = true;
+	adConfig.enablePoliteForCS = true;
+
+	EBG.customFormats = EBG.customFormats || {};
+	EBG.customFormats[uid] = EBG.customFormats[uid] || {};
+	
+	try {
+		if(parent.EBG) {
+			parent.EBG.customFormats = parent.EBG.customFormats || {};
+			parent.EBG.customFormats[uid] = EBG.customFormats[uid];
+		}
+	}
+	catch(e){}
+	//-------------------------------------------------
+
+
+
+	//=================================================
+	// Constructor
+	//-------------------------------------------------
+	/**
+	 * Creates the CustomFormat object.
+	 *
+	 * @constructor
+	 * @this {CustomFormat}
+	 */
+	function CustomFormat() {
+		self = this;	//use self instead of this for guaranteed reference to this object and not window (on event handlers)
+
+		EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.SHOW_AD,self.handlers.handleBeforeShowAd,EBG.Events.EventTiming.BEFORE,{myAd:uid});
+
+		// How to unsubscribe:
+		// EBG.API.EventManager.unsubscribeFromEvent(EBG.Events.EventNames.SHOW_AD,self.handlers.handleBeforeShowAd,EBG.Events.EventTiming.BEFORE,{myAd:uid});
+	}
+	//-------------------------------------------------
+
+
+
+
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------
+	//=================================================
+	// Public methods/functions/properties
+	//-------------------------------------------------
+	CustomFormat.prototype = {
+		isDebug: isDebug,	//this is only here so it can be overridden by a custom script plugin
+
+		//if you want to override an event handler, overwrite its entry in the handlers object to point to your function
+		//=================================================
+		// Event Handlers
+		//-------------------------------------------------
+		handlers: {
+			// In the event of having more than 1 subscription for a specific event/timing pair, just number each one (including the first, e.g.: SHOW_AD_BEFORE1)
+			handleBeforeShowAd:				function(){return self._handleBeforeShowAd.apply(this,arguments);},
+			handleAfterShowAd:				function(){return self._handleAfterShowAd.apply(this,arguments);},
+			handleBeforeExpand:				function(){return self._handleBeforeExpand.apply(this,arguments);},
+			handleAfterExpand:				function(){return self._handleAfterExpand.apply(this,arguments);},
+			handleBeforeCollapse:			function(){return self._handleBeforeCollapse.apply(this,arguments);},
+			handleBeforeAddCreatives:		function(){return self._handleBeforeAddCreatives.apply(this,arguments);},
+			handleAfterAddCreatives:		function(){return self._handleAfterAddCreatives.apply(this,arguments);},
+			handleOntimePageResize:			function(){return self._handleOntimePageResize.apply(this,arguments);},
+			handleAfterPageResize:			function(){return self._handleAfterPageResize.apply(this,arguments);},
+			handleOntimePageScroll:			function(){return self._handleOntimePageScroll.apply(this,arguments);},
+			handleOntimeOrientation:		function(){return self._handleOntimeOrientation.apply(this,arguments);},
+			handleCreativeContainerReady:	function(){return self._handleCreativeContainerReady.apply(this, arguments);}		//no comma
+		},
+		
+		_handleBeforeShowAd: function(event) {
+			self.log("handleBeforeShowAd: isDefaultImage="+event.eventData.isDefaultImage+", dlm="+EBG.API.Ad.getAdData(uid,"dlm")+", uponShow="+EBG.API.Ad.getAdData(uid,"uponShow")); //add ,event if you want to see all properties traced
+			if (event.eventData.isDefaultImage) return;		// don't do anything else if we're just serving a default image
+			//console.log("-----asdasdasd-------");
+			ad = event.dispatcher;
+			os = EBG.API.os;
+			browser = EBG.API.browser;
+
+			self.isPolite = self.wasPolite = EBG.API.Ad.getAdData(uid,"dlm") == 1;
+
+			self.displayWin = EBG.API.Adaptor.getDisplayWin();
+			self.displayWin.gEbPIT = self.displayWin.gEbPIT || {};
+			self.subs = self.displayWin.gEbPIT.subscriptions = self.displayWin.gEbPIT.subscriptions || {};
+			
+			self.expandPanelShown = false;
+			self.currentScrollTop = null;
+			self.scrollTimer = null;
+			self.resizeTimer = null;
+			
+			self.defaultCustomFormatVars = {
+				mdBannerPanelName: "banner",
+				mdExpandPanelName: "expand",
+				mdFullwidthBanner: true,		// ad builder is not support this custom var
+				mdHideBannerOnUserScroll: true,
+				mdRestrictPageScrollWhenExpand: true, // this may not work properly for ad builder ad
+				mdEyeDivZIndex: EBG.API.Adaptor.getHighestZIndex(),
+				mdAdBuilder: !!EBG.API.Ad.getAdData(uid,"adBuilder")
+			};
+
+			self.initCustomVars();
+			
+			self.mdBannerPanelName = self.mdBannerPanelName.toLowerCase();
+			self.mdExpandPanelName = self.mdExpandPanelName.toLowerCase();
+			console.log(self.mdBannerPanelName);
+			EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.SHOW_AD,					self.handlers.handleAfterShowAd,			EBG.Events.EventTiming.AFTER,	{myAd:uid});
+			EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.ADD_CREATIVES,				self.handlers.handleBeforeAddCreatives,		EBG.Events.EventTiming.BEFORE,	{myAd:uid});
+			EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.ADD_CREATIVES,				self.handlers.handleAfterAddCreatives,		EBG.Events.EventTiming.AFTER,	{myAd:uid});
+			EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.EXPAND,						self.handlers.handleBeforeExpand,			EBG.Events.EventTiming.BEFORE,	{myAd:uid});
+			EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.EXPAND,						self.handlers.handleAfterExpand,			EBG.Events.EventTiming.AFTER,	{myAd:uid});
+			EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.COLLAPSE,					self.handlers.handleBeforeCollapse,			EBG.Events.EventTiming.BEFORE,	{myAd:uid});
+			EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.CREATIVE_CONTAINER_READY,	self.handlers.handleCreativeContainerReady,	EBG.Events.EventTiming.ONTIME,	{myAd:uid});			
+			self.addWindowListener("message", "handleMessageReceived", self._handleMessageReceived);
+
+			if (self.mdHideBannerOnUserScroll && (os.ios && os.ver <= 7)) {
+				self.displayWin.addEventListener("touchmove", self._handleTouchMove, false);
+				self.displayWin.addEventListener("touchend", self._handleTouchEnd, false);
+				self.displayWin.addEventListener("touchcancel", self._handleTouchCancel, false);
+				self.displayWin.addEventListener("touchleave", self._handleTouchLeave, false);
+			}
+			
+			self.ebDiv = EBG.API.Ad.getPlaceholder(uid);
+			self.panels = EBG.API.Ad.getAdData(uid, "panels");
+
+			if(!self.isPolite) {
+				self._subscribeToResizeScrollOrientation("_handleBeforeShowAd:not polite");
+				self.defaultPanel = ad._panels[EBG.API.Ad.getAdData(uid, "defaultPanelName").toLowerCase()];
+			}
+		},
+		
+		_handleAfterShowAd: function(event) {
+			self.log("handleAfterShowAd: isDefaultImage="+event.eventData.isDefaultImage+", dlm="+EBG.API.Ad.getAdData(uid,"dlm")+", uponShow="+EBG.API.Ad.getAdData(uid,"uponShow"));  //add ,event if you want to see all properties traced
+			if(!self.wasPolite) {
+				self.iframe = EBG.API.Banner.getElements(uid).banner;
+				self.bannerDiv = EBG.API.Banner.getElements(uid).bannerDiv;
+			}
+		},
+		_handleBeforeExpand: function(event) {
+			self.log("_handleBeforeExpand: panelName="+event.dispatcher.panelName);  //add ,event if you want to see all properties traced
+			self.defaultPanel = ad._panels[EBG.API.Ad.getAdData(uid, "defaultPanelName").toLowerCase()];
+			if (!self.eyeDiv) {
+				self.eyeDiv = EBG.API.Adaptor.getEyeDiv();
+			}
+			EBG.API.Adaptor.setStyle(self.eyeDiv, {
+				zIndex: self.mdEyeDivZIndex
+			});
+			if (event.eventData.props.panel.name === self.mdBannerPanelName) {
+				if (self.mdRestrictPageScrollWhenExpand) {
+					self.displayWin.scrollTo(0, self.currentScrollTop);
+					EBG.API.Adaptor.restoreScrollBarsState();
+				}
+				
+				self.bannerPanel = ad._panels[self.mdBannerPanelName];
+				self.bannerPanelDiv = EBG.API.Adaptor.getElementById(self.bannerPanel.divId);
+				//console.log("asdasdasdsad"+self.bannerPanelDiv);
+					
+				EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+					position: "fixed",
+					overflow: "hidden",
+					display: "none"
+				});			
+			}
+			else if (event.eventData.props.panel.name === self.mdExpandPanelName) {
+				if (self.mdRestrictPageScrollWhenExpand) {
+					self.currentScrollTop = self.getScrollTop();
+					EBG.API.Adaptor.hideScrollBars();
+				}
+
+				self.expandPanel = EBG.API.Panel.getElements(uid, self.mdExpandPanelName);
+				self.expandPanelDiv = self.expandPanel.panelDiv;
+				self.expandPanelFrame = self.expandPanel.panel;
+				if (!self.mdAdBuilder) {
+					EBG.API.Adaptor.setStyle(self.expandPanelDiv, {
+						position: "fixed",
+						overflow: "hidden",
+						display: (os.ios && os.ver <= 7) ? "" : "none"
+					});	
+				}				
+			}
+		},
+		
+		_handleAfterExpand: function(event) {
+			self.log("_handleAfterExpand: panelName="+event.dispatcher.panelName);  //add ,event if you want to see all properties traced
+			if (event.eventData.props.panel.name === self.mdBannerPanelName) {
+				self.expandPanelShown = false;
+				self.setBannerPanelDimension();
+				EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+					display: "block"
+				});
+			}
+			else if (event.eventData.props.panel.name === self.mdExpandPanelName) {
+				self.expandPanelShown = true;
+				self.setExpandPanelDimension();
+				if (!self.mdAdBuilder) {
+					EBG.API.Adaptor.setStyle(self.expandPanelDiv, {
+						display: "block"
+					});
+				}
+			}
+		},
+
+		_handleBeforeCollapse: function(event) {
+			console.log("bsdads");
+			console.log("asas");
+            self.bannerPanelDiv._sendMessage("eventCallback", msg.data);
+		},
+		
+		_handleBeforeAddCreatives: function(event) {
+			self.log("_handleBeforeAddCreatives:"+event.eventData.creativeType+":panelName="+(event.dispatcher.panelName || "banner"));  //add ,event if you want to see all properties traced
+			//check in event data for whether this is a banner or panel, and if a panel, which panel is it
+			//you can then modify what you need to before the banner/panel are created. You can modify
+			//the expand/collapse parameters here too. The ADD_CREATIVES is dispatched after the panel's
+			//CC object is created with all the default parameters, but just before the HTML tags are
+			//written to the page, so in addition to modify the expand/collapse params, you can also
+			//modify the HTML tags that are about to be written.
+
+			//if(event.eventData.creativeType == EBG.Events.EventNames.ADD_BANNER_PRELOAD_IMAGE_CREATIVE) {	//adding the preload img
+			//}
+
+			if(event.eventData.creativeType == EBG.Events.EventNames.ADD_HTML5_MAIN_CREATIVE) {	//adding the HTML5 banner
+				if(self.isPolite) {
+					self._subscribeToResizeScrollOrientation("_handleBeforeAddCreatives:banner:was polite");
+					self.isPolite = false;	//not polite anymore (note: we still have self.wasPolite if we want to know if we 'were')
+				}
+			}
+			else if(event.eventData.creativeType == EBG.Events.EventNames.ADD_HTML5_PANEL_CREATIVE) {
+				//event.eventData.panelName is being added
+				self.defaultPanel = ad._panels[EBG.API.Ad.getAdData(uid,"defaultPanelName").toLowerCase()]; //you may want to know this before now, but default panel isn't "set" until first panel gets added
+			}
+		},
+
+		_handleAfterAddCreatives: function(event) {
+			self.log("_handleAfterAddCreatives:"+event.eventData.creativeType+":panelName="+(event.dispatcher.panelName || "banner"));  //add ,event if you want to see all properties traced
+		},
+
+		_subscribeToResizeScrollOrientation: function(trig) {
+			if(!self.subscribedRSO) {	//time to subscribe to Resize/Scroll/Orientation events, as long as we didn't already do that
+				//comment out those you don't need, and add any mouse-based subscriptions here
+				EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.PAGE_RESIZE,		self.handlers.handleOntimePageResize,			EBG.Events.EventTiming.ONTIME,	{myAd:uid});
+				EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.PAGE_RESIZE,		self.handlers.handleAfterPageResize,			EBG.Events.EventTiming.AFTER,	{myAd:uid});
+				EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.PAGE_SCROLL,		self.handlers.handleOntimePageScroll,			EBG.Events.EventTiming.ONTIME,	{myAd:uid});
+				EBG.API.EventManager.subscribeToEvent(EBG.Events.EventNames.SCREEN_ORIENTATION,	self.handlers.handleOntimeOrientation,			EBG.Events.EventTiming.ONTIME);
+				self.subscribedRSO = true;
+				self.log("_subscribeToResizeScrollOrientation:triggered by "+trig);
+			}
+		},
+
+		_handleMessageReceived: function(event, params) {
+		//	console.log("ijasida");
+			try {
+	            var msg = event ? JSON.parse(event.data) : params;
+	            //only messages with matching uid are handled.
+	            //Don't change this code to match what your assets send, change your
+	            //assets to match this (you NEED to send uid for multiple ads on a page).
+				if(msg.type && msg.data && msg.data.uid && msg.data.uid == uid && self.messageHandlers.hasOwnProperty(msg.type)) {
+					
+                        self.log("_handleMessageReceived:"+msg.type,msg);
+					    self.messageHandlers[msg.type](msg);
+                      
+                    
+					//console.log("ijasidaasd"+msg.data);
+                    console.log(showbanner);
+                    
+				}
+			} 
+			catch (e) {
+                
+				self.log("_handleMessageReceived:catch",e);
+				//console.log("ijasida"+msg);
+			}
+		},
+		
+		 messageHandlers: {
+			addCustomScriptEventListener: function(msg) {
+				self.subs[msg.data.listenerId] = msg.data;
+				//console.log("ijasidaasdasd"+msg.data);
+			},
+
+			dispatchCustomScriptEvent: function(msg) {
+				for (var i in self.subs) {
+					if (!self.subs[i]) continue;
+					var isEventMatch = self.subs[i].eventName === msg.data.eventName;
+					var isCurrentAd = msg.data.uid === self.subs[i].uid;
+					var isOutOfAdScope = !isCurrentAd && !msg.data.interAd;
+					if (!isEventMatch || isOutOfAdScope) continue;
+					if (self.subs[i].callback) {
+						try {
+							self.subs[i].callback(msg.data);
+						}
+						catch(e) {
+							delete self.subs[i];		//delete 'lost' listener
+						}
+					}
+					else {
+						var listenerIds = [];
+						listenerIds[listenerIds.length] = self.subs[i].listenerId;
+						msg.data.listenerIds = listenerIds;
+						try{
+                            self.CCs[self.subs[i].creativeIFrameId]._sendMessage("eventCallback", msg.data);
+                            alert('popo');
+                        }catch (error) {}
+					}
+				}
+				//console.log("asdasd"+msg.data);
+
+
+			},
+
+			removeCustomScriptEventListener: function(msg) {
+				delete self.subs[msg.data.listenerId];
+				if(msg.data.creativeIFrameId) delete self.CCs[msg.data.creativeIFrameId];
+			},
+
+			closeAd: function() {
+				alert("a");
+				self.removeAd();
+
+			},
+
+			endFullScreen: function() {
+				self.endFullScreen();
+			},
+
+            setCreativeVersion: function(msg) {
+				if (msg.data.creativeVersion) {
+					self.handleSetCreativeVersion(msg.data);
+				}
+			},
+             
+            sayhello: function(){
+                //console.log("Hello this is message from custom JS");
+                //var adIframe = EBG.API.Adaptor.getElementById("ebAd" + adId + "_" + self.defaultCV.main_panel + "_iframe_" + uid);
+                //var adIframe = EBG.API.Banner.getElements(uid).bannerDiv;
+                
+                //console.log(adIframe);
+                //$(adIframe).prop('contentWindow').youcallme();
+                //adIframe.contentWindow.youcallme();
+                //adIframe.contentWindow.postMessage("youcallme", "*");
+            }
+		},
+		
+		_handleOntimePageResize: function() {
+			if (self.mdHideBannerOnUserScroll && !self.expandPanelShown) {
+				if (self.resizeTimer) {
+					clearTimeout(self.resizeTimer);
+				}
+				EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+					display: "none" 
+				});
+			}
+		},
+		
+		_handleAfterPageResize: function() {
+			if (self.expandPanelShown) {
+				self.setExpandPanelDimension();
+			}
+			else {
+				self.setBannerPanelDimension();
+				self.resizeTimer = setTimeout(function() {
+					EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+						display: "block"
+					});
+				}, os.mobile ? 750 : 50);
+			}
+		},		
+		
+       
+		_handleOntimePageScroll: function() {
+            //adIframe.contentWindow.postMessage(JSON.stringify(message), "*");
+            //var adIframe = EBG.API.Adaptor.getElementById("ebAd" + adId + "_" + self.defaultCV.main_panel + "_iframe_" + uid);
+            //adIframe.contentWindow.postMessage("hello", "*");
+            //var adIframe = self.mdBannerPanelName;
+            //adIframe.contentWindow.postMessage("youcallme", "*");
+               //var adIframe = EBG.API.Adaptor.getElementById("ebAd" + adId + "_" + self.defaultCV.main_panel + "_iframe_" + uid);
+               
+			if (self.expandPanelShown) {
+				if (os.mobile && self.mdRestrictPageScrollWhenExpand) {
+					self.scrollTimer = setTimeout(function() {
+						self.displayWin.scrollTo(0, self.currentScrollTop);
+						clearTimeout(self.scrollTimer);
+				    
+					}, 500);
+				}
+			}
+			else {
+				if (self.mdHideBannerOnUserScroll && !(os.ios && os.ver <= 7)) {
+					if (self.scrollTimer) {
+						clearTimeout(self.scrollTimer);
+					}
+					EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+						display: "none" 
+					});
+					
+					self.scrollTimer = setTimeout(function() {
+						EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+							display: "block"
+						});
+
+
+					var msgh = {type: "tokai",data: {animationTime: "data"}};
+					self.bannerPanelDivs = EBG.adaptor.getDisplayWin().document.getElementById(ebO.adConfig.placeHolderId).getElementsByTagName("iframe")[0];
+					//console.log(self.bannerPanelDivs);
+       				
+                    //self.bannerPanelDivs.contentWindow.postMessage(JSON.stringify(msgh), "*");
+                        
+					
+						clearTimeout(self.scrollTimer);
+						self.setBannerPanelPosition();
+					}, 250);
+
+
+				}
+			}
+		},
+		
+		_handleOntimeOrientation: function() {
+			self._handleOntimePageResize();
+			self._handleAfterPageResize();			
+		},
+		
+		_handleTouchMove: function() {
+			if (!self.expandPanelShown) {			
+				EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+					display: "none" 
+				});
+			}
+		},
+		
+		_handleTouchEnd: function() {
+			if (!self.expandPanelShown) {
+				EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+					display: "block" 
+				});
+			}
+		},
+
+		_handleTouchCancel: function() {
+			self._handleTouchEnd();
+		},
+		
+		_handleTouchLeave: function() {
+			self._handleTouchEnd();
+		},
+				
+		//-------------------------------------------------
+		//End of Event Handlers Section
+		//=================================================
+
+		
+		
+		
+		//=================================================
+		// Custom Event Method
+		//-------------------------------------------------			
+		dispatchCustomScriptEvent: function(eventName, params) {
+			var paramsData = {type:"dispatchCustomScriptEvent",data:params||{}};
+			paramsData.data.uid = uid;
+			paramsData.data.eventName = eventName;
+			self._handleMessageReceived(undefined, paramsData);
+		},
+
+		addCustomScriptEventListener: function(eventName, callback, interAd) {
+			var data = {uid:uid,listenerId:Math.ceil(Math.random()*1000000000),eventName:eventName,interAd:!!(interAd),callback:callback};
+			self._handleMessageReceived(undefined,{data:data,type:"addCustomScriptEventListener"});
+			return data.listenerId;
+		},
+
+		removeCustomScriptEventListener: function(listenerId) {
+			self._handleMessageReceived(undefined, {data:{uid:uid,listenerId:listenerId},type:"removeCustomScriptEventListener"});
+		},
+
+		setBannerPanelDimension: function() {
+			EBG.API.Panel.modify(uid, self.mdBannerPanelName, {
+				width: (self.mdFullwidthBanner ? self.getViewPortWidth() : self.bannerPanel.width)
+			}, true);
+		},
+		
+		setExpandPanelDimension: function() {
+			if (!self.mdAdBuilder) {
+				EBG.API.Panel.modify(uid, self.mdExpandPanelName, {
+					width: self.getViewPortWidth(),
+					height: self.getViewPortHeight()
+				}, true);
+			}
+		},
+		
+		setBannerPanelPosition: function() {
+			if (self.getScrollTop() === 0 && self.bannerPanelDiv.getBoundingClientRect().bottom !== self.getViewPortHeight()) {
+				self.scrollTimer = setTimeout(function() {
+					EBG.API.Adaptor.setStyle(self.bannerPanelDiv, {
+						top: EBG.px(self.getViewPortHeight() - self.bannerPanel.height)
+					});
+				}, 1500);				
+			}
+		},
+
+		endFullScreen: function() {
+			// fix iOS 7 the page height increased after video plays in fullscreen and rotated
+			if (os.ios && os.ver <= 7) {
+				self.setExpandPanelDimension();
+			}
+		},
+		//-------------------------------------------------
+		//End of Custom Event Method
+		//=================================================		
+		
+		
+		
+		
+		//=================================================
+		// Custom Vars Related Functions
+		//-------------------------------------------------
+		initCustomVars: function() {
+			//self.log("initCustomVars",self.defaultCustomFormatVars);
+			for (var cv in self.defaultCustomFormatVars) {
+				if (!self.defaultCustomFormatVars.hasOwnProperty(cv))continue;
+				self.setDefault(cv, self.defaultCustomFormatVars[cv]); // once undefined allowed to be set by type (not "undefined"), replace this line with API setCustomVar
+			}
+			self.setDefaultWithAppend("mdCustomFormatScriptVer",scriptName + "," + scriptVersion,"|");
+		},
+		
+		setDefault: function(varName, defaultValue, optional_override) {
+			//self.log("setDefault",arguments);
+			EBG.API.Ad.setCustomVar(uid, varName, defaultValue, !!optional_override);
+			self[varName] = EBG.API.Ad.getCustomVar(uid, varName);
+		},
+		
+		//this one lets you append strings to an existing string custom var, with optional delimiter
+		setDefaultWithAppend: function(varName, defaultValue, optionalDelimiter) {
+			var delim = optionalDelimiter || "";
+			var val = EBG.API.Ad.getCustomVar(uid,varName);		//see if we already have a string in there
+			//self.log("setDefaultWithAppend, current = "+val);
+			val = typeof val == "string" ? (val + delim + defaultValue) : defaultValue;
+			//self.log("setDefaultWithAppend, new = "+val);
+			self.setDefault(varName, val, true);
+		},
+		//-------------------------------------------------
+		//End of Custom Vars Related Functions Section
+		//=================================================
+
+
+
+
+		//=================================================
+		// Expandable Functions Section (NOTE: Remove If your format is a Single Expandable!!!!)
+		//-------------------------------------------------		
+		getViewPortHeight: function() {
+			return EBG.API.Adaptor.getViewPortMetrics().Height;
+		},
+		
+		getViewPortWidth: function() {
+			return EBG.API.Adaptor.getViewPortMetrics().Width;
+		},
+		
+		getScrollTop: function() {
+			return (self.displayWin.pageYOffset !== undefined) ? self.displayWin.pageYOffset : (self.displayWin.document.documentElement || self.displayWin.document.body.parentNode || self.displayWin.document.body).scrollTop;
+		},
+		//-------------------------------------------------
+		//End of Expandable Functions Section
+		//=================================================
+
+		
+		
+		
+		//=================================================
+		// Utility Functions
+		//-------------------------------------------------
+		log: function() {	// this is a closure-compiled version of the original code
+			if(self.isDebug){var b,a,c;b=Array.prototype.slice.call(arguments);a=new Date();a=scriptName+" ("+a.getFullYear()+"-"+a.getMonth()+"-"+a.getDate()+" "+a.getHours()+":"+a.getMinutes()+":"+a.getSeconds()+"."+a.getMilliseconds()+"): ";b.unshift(a);try{window.console&&console.log&&(console.log.apply?console.log.apply(console,b):console.log(b))}catch(d){(function(a){c=function(a){throw Error("DEBUG: "+a);};setTimeout(c(a),1)})(b.join())}}
+		},
+
+		removeAd: function() {
+			for (var panel in ad._panels) {
+				self.hidePanelWithoutTrack(ad._panels[panel].name);
+			}
+			if (self.ebDiv.parentNode) {
+				self.ebDiv.parentNode.removeChild(self.ebDiv);
+				
+			}
+
+				//EBG.API.Adaptor.setStyle(self.eyeDiv, {
+				//	overflow: "auto !important",
+				//	});
+				EBG.API.Adaptor.removeElement(self.eyeDiv);
+				EBG.API.Adaptor.setStyle(self.body, {
+					overflow: "auto",
+				});	
+
+				self.body.document.body.style.overflow = "auto !important";
+        		console.log(self.body);
+				
+		},
+		
+		addWindowListener: function(eventName, handlerIndex, func) {
+			self.handlers[handlerIndex] = function(){return func.apply(this,arguments);};	//make this handler overrideable by plugin script
+			if(self.displayWin.addEventListener)
+				self.displayWin.addEventListener(eventName, self.handlers[handlerIndex], false);
+			else if(self.displayWin.attachEvent)
+				self.displayWin.attachEvent(on+eventName, self.handlers[handlerIndex]);
+		},
+		
+		removeWindowListener: function(eventName, handlerIndex, func) {
+			if(self.displayWin.removeEventListener)
+				self.displayWin.removeEventListener(eventName, self.handlers[handlerIndex], false);
+			else if(self.displayWin.detachEvent)
+				self.displayWin.detachEvent(on+eventName, self.handlers[handlerIndex]);
+			delete self.handlers[handlerIndex];
+		},
+		
+	    hidePanelWithoutTrack: function(panelname) {
+	        ad._panels[panelname].CC.collapse(true);
+	    },
+				
+		handleSetCreativeVersion: function(event) {	//handle the setCreativeVersion event received from the HTML5 Banner
+			self.versions["creativeIds"] +=	((self.versions["creativeIds"] !== "" ? "|" : "") + event.creativeId);
+			self.versions["creativeVers"] += ((self.versions["creativeVers"] !== "" ? "|" : "") + event.creativeVersion);
+			self.versions["creativeLastMods"] += ((self.versions["creativeLastMods"] !== "" ? "|" : "") + event.creativeLastModified);
+		},
+
+		reportCFVersions: function() {	//report 'our' versions in this ad, may or may not be called by our own reportCFV function
+			self.isDebug = true;
+			var delim = "", s = "reportCFVersions:uid:" +uid+ ": ";
+			for(var v in self.versions){if(self.versions.hasOwnProperty(v)){s+=(delim+v+": "+self.versions[v]);delim=", ";}}
+			self.log(s);
+		},
+		
+		versions: {
+			"scriptVer":		scriptVersion,
+			"scriptLastMod":	lastModified,
+			"templateVer":		templateVersion,
+			"creativeIds":		"",
+			"creativeVers":		"",
+			"creativeLastMods":	""
+		}
+		//-------------------------------------------------
+		//End of Utility Functions
+		//=================================================
+	};
+
+	EBG.reportCFV = function(){for(var i in EBG.customFormats)for(var x in EBG.customFormats[i])try{EBG.customFormats[i][x].reportCFVersions();}catch(e){};};
+
+	/***************************************************************************/
+	/*Initialization : Must be down here after the prototype is fully defined  */
+	/***************************************************************************/
+	EBG.customFormats[uid][scriptName] = new CustomFormat(); //create our 'self' class object which holds all of our functionality
+});
