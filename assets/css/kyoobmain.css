@@ -66,10 +66,65 @@ p {
     padding-left: 10px;
     padding-top: 187px;
     border-radius: 24px;
-    border: 5px solid #dd679d;}
+    border: 5px solid #dd679d;
+}
+
+.workspace-dimension {
+    text-align: center;
+    font-size: 20px;
+}
+
+.workspace-creativename {
+    text-align: center;
+    font-size: 15px;
+}
+
+.workspace-template {
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 17px;
+}
+
+.workspace-impr {
+    text-align: center;
+    font-size: 47px;
+    font-weight: 100;
+    padding: 28px 10px 10px 10px;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    margin-bottom: 10px;
+    left: 0;
+    right: 0;
+    
+    border: 9px solid #23ec01;
+}
+
+.hand_cursor {
+    cursor: pointer;
+}
+
+
+.ring-yellow {
+    border: 9px solid #e6eb00;
+}
+
+.icon-copy {
+    font-size: 10px;
+}
+
+.icon-wp {
+    text-align: center;
+    height: 50px;
+}
 
 .info-right-fix {
     font-size: 12px;
+}
+
+.copy-right-con {
+    margin-top: 20px;
 }
 
 .btn-kyoob-purple {

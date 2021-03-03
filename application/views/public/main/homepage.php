@@ -98,7 +98,13 @@
                 </div>
 
             </div>
-
+<!--copyright-->            
+<div class="copy-right-con">
+<p class="info-right-fix" style="text-align:center;">
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</p>
+</div>
+<!--endofcopyright-->
         </div>
         <div class="col-lg-2">
             <a href='<?=base_url('create')?>'><button class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Create Ads</button></a><br>

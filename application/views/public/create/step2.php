@@ -68,7 +68,13 @@
 
 
             </div>
-
+<!--copyright-->            
+<div class="copy-right-con">
+<p class="info-right-fix" style="text-align:center;">
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</p>
+</div>
+<!--endofcopyright-->
         </div>
         <div class="col-lg-4">
             <p>Live Preview</p>
