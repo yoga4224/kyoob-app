@@ -43,8 +43,7 @@
                                         <p class='icon-copy'>Share</p>  
                                       </div>
                                       <div class="p-2 icon-wp mr-auto align-items-end hand_cursor">
-                                        <img class="mr-auto" style='width:25px;' src='<?=base_url()?>assets/images/file.svg'>  
-                                          <p class='icon-copy'>Download Source</p>
+                                        <a href="<?=base_url('create/cube')?>" class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Process Quote</a>
                                       </div>
                                     </div>    
                                     </div>

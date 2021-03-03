@@ -65,7 +65,7 @@
                     <a href="https://kyoob-ads.com/" target="_blank">Showcase</a>
                 </li>
                 <?php 
-                    if (($this->uri->segment(1)) == 'User'){
+                    if (($this->uri->segment(1)) == 'user'){
                         echo '<li class="active">';
                     }else{
                         echo '<li>';
