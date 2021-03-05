@@ -44,25 +44,45 @@
                     <a href="<?=base_url();?>">Overview</a>
                 </li>
                 <?php 
-                    if (($this->uri->segment(1)) == 'Workspace'){
+                    if (($this->uri->segment(1)) == 'workspace'){
                         echo '<li class="active">';
                     }else{
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url('Workspace')?>">My Workspace</a>
+                    <a href="<?=base_url('workspace')?>">My Workspace</a>
                 </li>
                 <?php 
-                    if (($this->uri->segment(1)) == 'Create'){
+                    if (($this->uri->segment(1)) == 'create'){
                         echo '<li class="active">';
                     }else{
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url('Create');?>">Template Ads</a>
+                    <a href="<?=base_url('create');?>">Template Ads</a>
                 </li>
                 <li>
                     <a href="https://kyoob-ads.com/" target="_blank">Showcase</a>
+                </li>
+    
+                <?php 
+                    if (($this->uri->segment(1)) == 'campaign'){
+                        echo '<li class="active">';
+                    }else{
+                        echo '<li>';
+                    }
+                 ?>
+                    <a href="<?=base_url('campaign');?>">Campaign</a>
+                </li>
+    
+                <?php 
+                    if (($this->uri->segment(1)) == 'account'){
+                        echo '<li class="active">';
+                    }else{
+                        echo '<li>';
+                    }
+                 ?>
+                    <a href="<?=base_url('account');?>">Advertiser</a>
                 </li>
                 <?php 
                     if (($this->uri->segment(1)) == 'user'){
@@ -71,7 +91,7 @@
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url('User');?>">User Profile</a>
+                    <a href="<?=base_url('user');?>">User Profile</a>
                 </li>
                 <li>
                     <a href="<?=base_url('Login/logout');?>">Log Out</a>

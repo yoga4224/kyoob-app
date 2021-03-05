@@ -35,6 +35,7 @@
                                     <div class="workspace-icons">
                                     <div class="d-flex flex-row-reverse">
                                       <div class="p-2 icon-wp align-items-end hand_cursor">
+                                          <a href="<?=base_url()?>"
                                           <img style='width:25px;' src='<?=base_url()?>assets/images/eye.svg'>
                                           <p class='icon-copy'>Preview</p>
                                       </div>
