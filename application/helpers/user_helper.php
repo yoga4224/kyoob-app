@@ -5,14 +5,15 @@ if ( ! function_exists('uploadImage'))
     function uploadImage($name, $path) 
     {
         $CI =& get_instance();
-        $new_name = time().$_FILES[$name]['name'];
 
+        $config = array();
         $config['upload_path'] = $path;
         $config['allowed_types'] = 'jpg|png|jpeg|PNG';
         $config['max_size']  = '2048';
         $config['remove_space'] = TRUE;
-        $config['file_name'] = $new_name;
-
+        $config['encrypt_name'] = TRUE;
+        $config['overwrite']     = FALSE;
+        
         $CI->load->library('upload', $config);
         if($CI->upload->do_upload($name)){ 
             $return = array('result' => 'success', 'file' => $CI->upload->data(), 'error' => '');

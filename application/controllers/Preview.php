@@ -10,11 +10,9 @@ class Preview extends CI_Controller {
 		parent::__construct();
 	}
 
-	
-    
-    public function index(){
-        
-        $this->load->view('public/preview/index');
+    public function index($id){
+        $this->container['id']=$id;
+        $this->load->view('public/preview/index',$this->container);
         
     }
 }

@@ -13,17 +13,35 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
+                        <?php foreach($creative as $row){ ?>
+                            <?php 
+                                if($row->process_quote == 0) { 
+                                    $color_ring = 'ring-yellow';
+                                    $quote_tag = '<a href="'.base_url().'workspace/processQuote/'.$row->id.'" class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Process Quote</a>';
+                                }elseif($row->process_quote == 1){
+                                    $color_ring = 'ring-yellow';
+                                    $quote_tag = '<strong>On Review</strong>';
+                                }elseif($row->process_quote == 2){
+                                    $color_ring = '';
+                                    $quote_tag = '<a href="'.base_url().'workspace/downloadzip/'.$row->id.'">
+                                        <img class="mr-auto" style="width:25px;" src="'.base_url().'assets/images/file.svg">  
+                                        <p class="icon-copy">Download Source</p>
+                                    </a>';
+                                }
+                            ?>
+                                
                             <div class="card wkspace-card" style="width: 18rem;">
                                 <div class="card-body">
                                     <div class="workspace-creativename">
-                                        Kyoob Test Campaign
+                                        <?= $row->creative_name ?>
                                     </div>
                                     <div class="workspace-dimension">
-                                        300x250
+                                        <?= $row->width.'x'.$row->height ?>
                                     </div>
                                     <div class="workspace-template">
-                                        Template :&nbsp;3D Cube
+                                        Template :&nbsp;<?= $row->template_name ?>
                                     </div>
+<<<<<<< Updated upstream
     
                                     <div class="workspace-impr ring-yellow">
                                         0
@@ -219,6 +237,10 @@
     
                                     <div class="workspace-impr">
                                         39K
+=======
+                                    <div class="workspace-impr <?= $color_ring ?>" >
+                                        <?= $row->impressions/10000 ?>K
+>>>>>>> Stashed changes
                                     </div>
                                     <div class="workspace-template">
                                         Impression Served
@@ -226,23 +248,26 @@
                                     
                                     <div class="workspace-icons">
                                     <div class="d-flex flex-row-reverse">
-                                      <div class="p-2 icon-wp align-items-end hand_cursor">
-                                          <img style='width:25px;' src='<?=base_url()?>assets/images/eye.svg'>
-                                          <p class='icon-copy'>Preview</p>
-                                      </div>
-                                      <div class="p-2 icon-wp align-items-end hand_cursor">
-                                        <img style='width:25px;' src='<?=base_url()?>assets/images/share.svg'>  
-                                        <p class='icon-copy'>Share</p>  
-                                      </div>
-                                      <div class="p-2 icon-wp mr-auto align-items-end hand_cursor">
-                                        <img class="mr-auto" style='width:25px;' src='<?=base_url()?>assets/images/file.svg'>  
-                                          <p class='icon-copy'>Download Source</p>
-                                      </div>
+                                        <div class="p-2 icon-wp align-items-end hand_cursor">
+                                            <a href="<?= base_url()."preview/index/".$row->id ?>" target="_blank">
+                                                <img style='width:25px;' src='<?=base_url()?>assets/images/eye.svg'>
+                                                <p class='icon-copy'>Preview</p>
+                                            </a>
+                                        </div>
+                                        <div class="p-2 icon-wp align-items-end hand_cursor">
+                                        <a href="<?= base_url()."workspace/processQuote/".$row->id ?>" >
+                                            <img style='width:25px;' src='<?=base_url()?>assets/images/share.svg'>  
+                                            <p class='icon-copy'>Share</p>  
+                                        </a>
+                                        </div>
+                                        <div class="p-2 icon-wp mr-auto align-items-end hand_cursor">
+                                            <?= $quote_tag ?>
+                                        </div>
                                     </div>    
                                     </div>
                                 </div>
                             </div>
-                        <!-- End of Card-->
+                        <?php } ?>
                     </div>
                 </div>
 

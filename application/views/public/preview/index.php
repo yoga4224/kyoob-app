@@ -32,7 +32,7 @@
     margin: auto;
     top: 34px;">
 
-                <iframe id='adframe' src="https://kyoob.studio/main/preview" width="100%" height="480" frameborder="0" scrolling="no" allowfullscreen="true" marginwidth="0" marginheight="0" vspace="0" hspace="0" style="border:0; width: 300px; height: 480px; "></iframe>
+                <iframe id='adframe' src="<?= base_url()."/main/preview/".$id ?>" width="100%" height="480" frameborder="0" scrolling="no" allowfullscreen="true" marginwidth="0" marginheight="0" vspace="0" hspace="0" style="border:0; width: 300px; height: 480px; "></iframe>
 
             </div>
         </div>

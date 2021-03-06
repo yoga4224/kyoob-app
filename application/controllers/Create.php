@@ -22,6 +22,8 @@ class Create extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('createModel');
+		$this->container['data'] = null;
 		LoggedSystem();
         //$this->load->model('Komparase_Model');
 
@@ -38,10 +40,26 @@ class Create extends CI_Controller {
     
     public function cube()
 	{
-        
-        $this->load->view('public/template/header');
-        $this->load->view('public/create/step2');
-        $this->load->view('public/template/footer');
+        if(!empty($_POST)){
+			$params = $this->input->post();
+			$params['userLog'] = $this->session->userdata('userId');
+			$params['template_form'] = 3;
+			$data = $this->createModel->upsertCube($params);
+
+            if($data){
+                // $this->session->set_flashdata(array("type" => "success", "msg" => "save data successfully!"));
+            }else{
+                // $this->session->set_flashdata(array("type" => "warning", "msg" => "save data filed!"));
+            }
+
+			redirect('/workspace');
+		}else{
+			$this->container['campaign'] = $this->createModel->getCampaign();
+			$this->container['dimension'] = $this->createModel->getDimension('3');
+			$this->load->view('public/template/header', $this->container);
+			$this->load->view('public/create/step2');
+			$this->load->view('public/template/footer');
+		}
         
     }
     
