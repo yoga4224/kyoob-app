@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta charset="utf-8">
     <title></title>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/hammer.min.js"></script>
-    <script src="js/swiper.min.js"></script>
+    <script src="<?= base_url() ?>assets/template/3dcube/js/jquery.min.js"></script>
+    <script src="<?= base_url() ?>assets/template/3dcube/js/hammer.min.js"></script>
+    <script src="<?= base_url() ?>assets/template/3dcube/js/swiper.min.js"></script>
 
-    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/template/3dcube/css/swiper.min.css">
     <!-- Custom CSS -->
     <style>
         html,
@@ -83,28 +83,28 @@
                     <div class="swiper-slide frame01">
                         <div id='htp1' class="hotspot"></div>
                         <a>
-                            <img class="frames" src="{{images1}}">
+                            <img class="frames" src="<?= base_url().'assets/upload/'.$assets[0]->url ?>">
                         </a>
                     </div>
                     <!-- Frame 02 -->
                     <div class="swiper-slide frame02">
                         <div id='htp2' class="hotspot"></div>
                         <a>
-                            <img class="frames" src="{{images2}}">
+                            <img class="frames" src="<?= base_url().'assets/upload/'.$assets[1]->url ?>">
                         </a>
                     </div>
                     <!-- Frame 03 -->
                     <div class="swiper-slide frame04">
                         <div id='htp3' class="hotspot"></div>
                         <a>
-                            <img class="frames" src="{{images3}}">
+                            <img class="frames" src="<?= base_url().'assets/upload/'.$assets[2]->url ?>">
                         </a>
                     </div>
                     <!-- Frame 04 -->
                     <div class="swiper-slide frame03">
                         <div id='htp4' class="hotspot"></div>
                         <a>
-                            <img class="frames" src="{{images4}}">
+                            <img class="frames" src="<?= base_url().'assets/upload/'.$assets[3]->url ?>">
                         </a>
                     </div>
                 </div><!-- End of Frames container -->
@@ -148,16 +148,16 @@
         function faceclick(e) {
             switch (e.target.id) {
                 case 'htp1':
-                    window.open('{{url1}}', '_BLANK');
+                    window.open('http://kyoob.id', '_BLANK');
                     break;
                 case 'htp2':
-                    window.open('{{url2}}', '_BLANK');
+                    window.open('http://kyoob.id', '_BLANK');
                     break;
                 case 'htp3':
-                    window.open('{{url3}}', '_BLANK');
+                    window.open('http://kyoob.id', '_BLANK');
                     break;
                 case 'htp4':
-                    window.open('{{url4}}', '_BLANK');
+                    window.open('http://kyoob.id', '_BLANK');
                     break;
             }
         }

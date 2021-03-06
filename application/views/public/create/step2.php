@@ -20,48 +20,62 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-
+                    <form action="<?= base_url() ?>create/cube" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Enter Campaign Name</label>
-                            <input type="text" class="form-control" id="campaign_name">
+                            <select class="form-control" name="campaign_id">
+                                <option>----</option>
+                                <?php 
+                                    foreach($campaign as $row){
+                                        echo "<option value='".$row->id."' ".($data->campaign_id == $row->id ? 'selected': '').">".$row->campaign_name."</option>";
+                                    }
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Enter Creative Name</label>
-                            <input type="text" class="form-control" id="campaign_name">
+                            <input type="text" name="creative_name" class="form-control" id="creative_name">
                         </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Enter Dimension</label>
+                            <select class="form-control" name="dimension_id">
+                                <option>----</option>
+                                <?php 
+                                    foreach($dimension as $row){
+                                        echo "<option value='".$row->id."' ".($data->dimension_id == $row->id ? 'selected': '').">".$row->width."x".$row->height."</option>";
+                                    }
+                                ?>
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Enter URL Landing Page</label>
-                            <input type="text" class="form-control" id="campaign_name">
+                            <input type="text" name="main_landing_page" class="form-control" id="main_landing_page">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Choose Face 1</label>
-                            <input type="file" class="form-control-file" id="face1" onchange='filechanged()'>
+                            <input type="file" name="assets[]" class="form-control-file" id="face1" onchange='filechanged()'>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Choose Face 2</label>
-                            <input type="file" class="form-control-file" id="face2" onchange='filechanged2()'>
+                            <input type="file" name="assets[]" class="form-control-file" id="face2" onchange='filechanged2()'>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Choose Face 3</label>
-                            <input type="file" class="form-control-file" id="face3" onchange='filechanged3()'>
+                            <input type="file" name="assets[]" class="form-control-file" id="face3" onchange='filechanged3()'>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlFile1">Choose Face 4</label>
-                            <input type="file" class="form-control-file" id="face4" onchange='filechanged4()'>
+                            <input type="file" name="assets[]" class="form-control-file" id="face4" onchange='filechanged4()'>
                         </div>
 
                         <div class="form-group">
                             <button style="width:150px;" class="btn btn-kyoob text-center my-2 btn-kyoob-pink">Cancel</button>
-
-                            <a href="<?=base_url('Workspace')?>">
-
-                                <button style="width:150px;" class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Save &amp; Share</button>
-                            </a>
-
+                            <button style="width:150px;" type="submit" class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Save &amp; Share</button>
                         </div>
-
-
+                    </form>
                     </div>
                 </div>
 

@@ -8,6 +8,8 @@ class Main extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+        LoggedSystem();
+		$this->load->model('WorkspaceModel');
 	}
 
 	public function downloadzip()
@@ -44,9 +46,9 @@ class Main extends CI_Controller {
         redirect(base_url() . "assets/template/demo/kyoob_demo_3dcube.zip");
     }
     
-    public function preview(){
-        
-        $this->load->view('public/demo/demo/index');
-        
+    public function preview($id){
+        $creative = $this->WorkspaceModel->getCreativeByid($id);
+        $this->container['assets'] = json_decode($creative->assets);
+        $this->load->view('public/demo/demo/index', $this->container);
     }
 }
