@@ -23,7 +23,7 @@ class Workspace extends CI_Controller {
 	public function processQuote($id){
 		$this->load->library('send_email');
 		$creative = $this->WorkspaceModel->getCreativePageByid($id);
-		$res = $this->send_email->send('demo.kyoob@gmail.com', 'demo.kyoob@gmail.com', 'public/template/email/process_quote', 'Process Quote Creative'.$creative->creative_name, $creative);
+		$res = $this->send_email->send('demo.project41@gmail.com', 'demo.adm41@gmail.com', 'public/template/email/process_quote', 'Process Quote Creative'.$creative->creative_name, $creative);
 
         if($res['success'] == 'true'){
             $this->WorkspaceModel->updateCreativeStatus($id, '1');
