@@ -101,6 +101,10 @@ p {
     border: 9px solid #23ec01;
 }
 
+.proc-quote {
+    font-size: 12px;
+}
+
 .hand_cursor {
     cursor: pointer;
 }

@@ -17,7 +17,7 @@
                             <?php 
                                 if($row->process_quote == 0) { 
                                     $color_ring = 'ring-yellow';
-                                    $quote_tag = '<a href="'.base_url().'workspace/processQuote/'.$row->id.'" class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Process Quote</a>';
+                                    $quote_tag = '<a href="'.base_url().'workspace/processQuote/'.$row->id.'" class="btn btn-kyoob proc-quote text-center my-2 btn-kyoob-purple">Process Quote</a>';
                                 }elseif($row->process_quote == 1){
                                     $color_ring = 'ring-yellow';
                                     $quote_tag = '<strong>On Review</strong>';
@@ -30,7 +30,7 @@
                                 }
                             ?>
                                 
-                            <div class="card wkspace-card" style="width: 18rem;">
+                            <div class="card wkspace-card" style="width: 16rem;">
                                 <div class="card-body">
                                     <div class="workspace-creativename">
                                         <?= $row->creative_name ?>
@@ -42,7 +42,7 @@
                                         Template :&nbsp;<?= $row->template_name ?>
                                     </div>
                                     <div class="workspace-impr <?= $color_ring ?>" >
-                                        <?= $row->impressions/10000 ?>K
+                                        <?= $row->impressions/10000 ?>k
                                     </div>
                                     <div class="workspace-template">
                                         Impression Served
