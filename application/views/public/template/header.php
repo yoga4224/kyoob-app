@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="<?=base_url()?>assets/css/kyoobmain.css">
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/kyoobmain.css?ver=1">
 
 
     <!-- Font Awesome JS -->
@@ -41,7 +41,7 @@
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url();?>">Overview</a>
+                <a href="<?=base_url();?>">Overview</a>
                 </li>
                 <?php 
                     if (($this->uri->segment(1)) == 'workspace'){
@@ -50,7 +50,7 @@
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url('workspace')?>">My Workspace</a>
+                <a href="<?=base_url('workspace')?>">My Workspace</a>
                 </li>
                 <?php 
                     if (($this->uri->segment(1)) == 'create'){
@@ -59,12 +59,12 @@
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url('create');?>">Template Ads</a>
+                <a href="<?=base_url('create');?>">Template Ads</a>
                 </li>
                 <li>
                     <a href="https://kyoob-ads.com/" target="_blank">Showcase</a>
                 </li>
-    
+
                 <?php 
                     if (($this->uri->segment(1)) == 'campaign'){
                         echo '<li class="active">';
@@ -72,9 +72,9 @@
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url('campaign');?>">Campaign</a>
+                <a href="<?=base_url('campaign');?>">Campaign</a>
                 </li>
-    
+
                 <?php 
                     if (($this->uri->segment(1)) == 'account'){
                         echo '<li class="active">';
@@ -82,7 +82,7 @@
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url('account');?>">Advertiser</a>
+                <a href="<?=base_url('account');?>">Advertiser</a>
                 </li>
                 <?php 
                     if (($this->uri->segment(1)) == 'user'){
@@ -91,7 +91,7 @@
                         echo '<li>';
                     }
                  ?>
-                    <a href="<?=base_url('user');?>">User Profile</a>
+                <a href="<?=base_url('user');?>">User Profile</a>
                 </li>
                 <li>
                     <a href="<?=base_url('Login/logout');?>">Log Out</a>
@@ -107,46 +107,51 @@
 
             <nav class="filter-bar shadow-pink">
                 <div class="container-fluid">
-                    
-                        <div class="row">
+
+                    <div class="row">
                         <div class="col-7">
                             <ul class="nav" style="list-style:none;">
-                            <li class='li-pdr-20'>
-                                <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Select Advertiser</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Dentsu Aegis</option>
-                                        <option>Dentsu Aegis</option>
-                                        <option>Dentsu Aegis</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li class='li-pdr-20'>
-                                <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Select Campaign</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>All Campaign</option>
-                                        <option>Disney Frozen</option>
-                                        <option>Disney Toy's Story</option>
-                                        <option>Disney Terminator 6</option>
-                                    </select>
-                                </div>
-                            </li>
+                                <li class='li-pdr-20'>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Select Advertiser</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>Dentsu Aegis</option>
+                                            <option>Dentsu Aegis</option>
+                                            <option>Dentsu Aegis</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class='li-pdr-20'>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Select Campaign</label>
+                                        <select class="form-control" id="exampleFormControlSelect1">
+                                            <option>All Campaign</option>
+                                            <option>Disney Frozen</option>
+                                            <option>Disney Toy's Story</option>
+                                            <option>Disney Terminator 6</option>
+                                        </select>
 
-                        </ul>
-                            </div>
+                                    </div>
+                                </li>
+                                <li class='li-pdr-20'>
+
+                                    <button type="submit" class="btn btn-kyoob text-center my-4 btn-kyoob-purple filter-btn">Filter</button>
+
+                                </li>
+                            </ul>
+                        </div>
                         <div class="col-5 float-right ">
                             <div class="row">
-                            <div class="col-lg-10 text-right">
-                                    
-                                <div class="text-right fs-18">Welcome <?= $_SESSION['fullName'] ?>,</div>
+                                <div class="col-lg-10 text-right">
+
+                                    <div class="text-right fs-18">Welcome <?= $_SESSION['fullName'] ?>,</div>
                                 </div>
                                 <div class="col-2"><img class="img-fluid float-right" src="<?=base_url()?>assets/images/avatar.png"></div>
                             </div>
-                            </div>
                         </div>
-                        
-                        
-                    
+                    </div>
+
+
+
                 </div>
             </nav>
