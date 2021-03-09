@@ -12,5 +12,16 @@ $(function () {
         $('#dwnloadbtn').attr('href', base_url + 'workspace/downloadzip/' + id)
     });    
     
+    $('#modalprocess').on('show.bs.modal', function (e) {
+        var id = $(e.relatedTarget).data('id');
+        document.getElementById('procbtn').addEventListener('click', function(){
+            window.location = base_url + 'workspace/processQuote/' + id;
+            console.log('Process');
+            
+        });
+    });    
+    
+    
+    
 });
 

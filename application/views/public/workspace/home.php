@@ -17,7 +17,7 @@
                             <?php 
                                 if($row->process_quote == 0) { 
                                     $color_ring = 'ring-yellow';
-                                    $quote_tag = '<a href="'.base_url().'workspace/processQuote/'.$row->id.'" class="btn btn-kyoob proc-quote text-center my-2 btn-kyoob-purple">Process Quote</a>';
+                                    $quote_tag = '<a data-toggle="modal" data-target="#modalprocess" href="#" data-id=' . $row->id . ' class="btn btn-kyoob proc-quote text-center my-2 btn-kyoob-purple">Process Quote</a>';
                                 }elseif($row->process_quote == 1){
                                     $color_ring = 'ring-yellow';
                                     $quote_tag = '<strong>On Review</strong>';
@@ -125,6 +125,32 @@
       <div style="margin:0 0 35px 0;">
         <a href="#" id='dwnloadbtn' style="width:125px;" class="btn btn-kyoob proc-quote text-center my-2 btn-kyoob-purple mx-auto d-block">Download ZIP file</a>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Process -->
+<div class="modal fade dimmer-color-modal-purple" id="modalprocess" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body center-text modal-header-kyoob-text">
+        <p>Process Quote this Ads?</p>
+      </div>
+      <div class="modal-header-kyoob-text-sub">
+          <p>
+             Are you sure want you Process Quote this ads? Once it proceed the tracker will counting the impression.
+          </p>
+      </div>
+      <div style="margin:35px 0 35px 0;">
+        
+        <img class="mx-auto d-block" src="<?=base_url()?>assets/images/comingsoon.png">
+             </div>
+     
+     <div class="modal-footer">
+        <button type="button" class="btn btn-kyoob proc-quote text-center my-2 btn-kyoob-purple" data-dismiss="modal">Cancel</button>
+        <button type="button" id='procbtn' class="btn btn-kyoob proc-quote text-center my-2 btn-kyoob-pink">Yes, Process!</button>
+      </div>    
     </div>
   </div>
 </div>
