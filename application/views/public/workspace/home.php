@@ -42,12 +42,11 @@
                                         Template :&nbsp;<?= $row->template_name ?>
                                     </div>
                                     <div class="workspace-impr <?= $color_ring ?>" >
-                                        <?= $row->impressions/10000 ?>k
+                                        <?= $row->impressions/10000 ?><span style="font-size:15px;">K</span>
                                     </div>
                                     <div class="workspace-template">
                                         Impression Served
                                     </div>
-                                    
                                     <div class="workspace-icons">
                                     <div class="d-flex flex-row-reverse">
                                         <div class="p-2 icon-wp align-items-end hand_cursor">

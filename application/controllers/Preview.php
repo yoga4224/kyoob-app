@@ -15,4 +15,6 @@ class Preview extends CI_Controller {
         $this->load->view('public/preview/index',$this->container);
         
     }
+    
+    
 }
