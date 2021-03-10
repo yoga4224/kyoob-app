@@ -76,6 +76,7 @@ class UserModel extends CI_Model {
 					$session = array(
 						'userLogged' => TRUE,
 						'userId' => $params['id'],
+						'accountId' => $params['account_id'],
 						'fullName' => $params['first_name']." ".$params['last_name'],
 						// 'userPhoto' => $url_image
 					);

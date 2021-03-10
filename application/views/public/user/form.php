@@ -18,6 +18,7 @@
                                 <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name" value="<?=  (!empty($data->last_name) ? $data->last_name : '') ?>">
                                 
                             </div>
+
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" name="email" placeholder="Enter Last Name" value="<?=  (!empty($data->email) ? $data->email : '') ?>">
@@ -40,6 +41,19 @@
                                     <option <?php echo (!empty($data->role)?($data->role == 2 ? 'selected': ''):'') ?> value="2">user</option>
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Advertiser</label>
+                                <select name="account_id" class="form-control form-control">
+                                    <option value='0'>ALL</option>
+                                    <?php 
+                                        foreach($account as $row){
+                                            echo "<option value='".$row->id."' ".($data->account_id == $row->id ? 'selected': '').">".$row->account_name."</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+
                             <input name="id" type="hidden" value="<?=  (!empty($data->id) ? $data->id : '') ?>" />
                             <button style="width:110px;" type="button" class="btn btn-kyoob btn-kyoob-pink">Cancel</button>
                             <button style="width:110px;" type="submit" class="btn btn-kyoob btn-kyoob-purple">Submit</button>

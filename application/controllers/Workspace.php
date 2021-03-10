@@ -8,17 +8,76 @@ class Workspace extends CI_Controller {
 		parent::__construct();
 		LoggedSystem();
 		$this->load->model('WorkspaceModel');
+		$this->load->model('MainModel');
 		$this->container = array();
+        $this->per_page = 6;
 	}
 	
 	public function index()
 	{
-        $this->container['creative'] = $this->WorkspaceModel->getCreativePage();
+        $page = (!empty($_GET['per_page']) ? $_GET['per_page'] : 0);
+		$getData = $this->WorkspaceModel->getCreativePage($this->per_page, $page);
+		$total_rows = $this->WorkspaceModel->countAllCreative();
+
+		$config = array(
+				'segment' 		=> $page, 
+				'creative' 	    => $getData,
+				'url' 			=> base_url('workspace/index?advertiser='.(!empty($_GET['advertiser'])?$_GET['advertiser']:'').'&campaign='.(!empty($_GET['campaign'])?$_GET['campaign']:'')),
+				'total_rows'	=> $total_rows,
+				'page'			=> $page,
+				'per_page'		=> $this->per_page
+			);
+
+		$this->container = $this->setPagination($config);
+        $this->container['account'] = $this->MainModel->getAccount();
+        $adv_id = ($_SESSION['accountId'] != 0 ? $_SESSION['accountId'] : '');
+        $this->container['campaign'] = $this->MainModel->getCampaign($adv_id);
+        $this->container['selected_page'] = 'workspace';
+
         $this->load->view('public/template/header', $this->container);
         $this->load->view('public/workspace/home');
         $this->load->view('public/template/footer');
         
     }
+
+    private function setPagination($conf){
+
+		$this->load->library('pagination');
+        
+        $config['total_rows']       = $conf['total_rows'];
+        $config['per_page']         = $conf['per_page'];
+        $choice                     = $config["total_rows"] / $config["per_page"];
+        $config["num_links"]        = floor($choice);
+		$config['base_url']         = $conf['url'];
+		$config["uri_segment"]      = $conf['segment'];
+        $config['enable_query_strings'] = TRUE;
+        $config['page_query_string'] = TRUE;
+      	$config['first_link']       = 'First';
+        $config['last_link']        = 'Last';
+        $config['next_link']        = 'Next';
+        $config['prev_link']        = 'Prev';
+        $config['full_tag_open'] 	= "<ul class='pagination'>";
+		$config['full_tag_close'] 	="</ul>";
+		$config['num_tag_open'] 	= '<li>';
+		$config['num_tag_close'] 	= '</li>';
+		$config['cur_tag_open'] 	= "<li class='disabled'><li class='active'><a href='#'>";
+		$config['cur_tag_close'] 	= "<span class='sr-only'></span></a></li>";
+		$config['next_tag_open'] 	= "<li>";
+		$config['next_tagl_close'] 	= "</li>";
+		$config['prev_tag_open'] 	= "<li>";
+		$config['prev_tagl_close'] 	= "</li>";
+		$config['first_tag_open'] 	= "<li>";
+		$config['first_tagl_close'] = "</li>";
+		$config['last_tag_open'] 	= "<li>";
+		$config['last_tagl_close'] 	= "</li>";
+ 
+        $this->pagination->initialize($config);
+
+		$data['creative'] = $conf['creative'];
+        $data['pagination'] = $this->pagination->create_links();
+
+        return $data;
+	}
 
 	public function processQuote($id){
 		$this->load->library('send_email');

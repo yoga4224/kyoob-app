@@ -108,27 +108,33 @@
             <nav class="filter-bar shadow-pink">
                 <div class="container-fluid">
 
+                <form action='<?= base_url().$this->uri->segment(1) ?>' method='GET'>
                     <div class="row">
                         <div class="col-7">
                             <ul class="nav" style="list-style:none;">
                                 <li class='li-pdr-20'>
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Select Advertiser</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>Dentsu Aegis</option>
-                                            <option>Dentsu Aegis</option>
-                                            <option>Dentsu Aegis</option>
+                                        <select <?= ($_SESSION['accountId'] != 0 ? 'disabled': '') ?> name="advertiser" class="form-control" id="exampleFormControlSelect1">
+                                            <option value="ALL">All Advertiser</option>
+                                            <?php 
+                                                foreach($account as $row){
+                                                    echo "<option ".($_SESSION['accountId'] != 0 ? 'selected': ($_GET['advertiser']==$row->id?'selected':''))." value='".$row->id."' >".$row->account_name."</option>";
+                                                }
+                                            ?>
                                         </select>
                                     </div>
                                 </li>
                                 <li class='li-pdr-20'>
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Select Campaign</label>
-                                        <select class="form-control" id="exampleFormControlSelect1">
-                                            <option>All Campaign</option>
-                                            <option>Disney Frozen</option>
-                                            <option>Disney Toy's Story</option>
-                                            <option>Disney Terminator 6</option>
+                                        <select name="campaign" class="form-control" id="exampleFormControlSelect1">
+                                            <option value="ALL">All Campaign</option>
+                                            <?php 
+                                                foreach($campaign as $row){
+                                                    echo "<option ".($_GET['campaign']==$row->id?'selected':'')." value='".$row->id."' >".$row->campaign_name."</option>";
+                                                }
+                                            ?>
                                         </select>
 
                                     </div>
@@ -151,7 +157,7 @@
                         </div>
                     </div>
 
-
+                </form>
 
                 </div>
             </nav>

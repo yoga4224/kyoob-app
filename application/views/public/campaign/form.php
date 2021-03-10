@@ -26,8 +26,6 @@
                                 </select>
                             </div>
                             
-                            
-                            
                             <input name="id" type="hidden" value="<?=  (!empty($data->id) ? $data->id : '') ?>" />
                                 
                             <button style="width:110px;" type="button" class="btn btn-kyoob btn-kyoob-pink">Cancel</button>

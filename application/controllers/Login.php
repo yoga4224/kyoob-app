@@ -23,6 +23,7 @@ class Login extends CI_Controller {
                 $session = array(
                         'userLogged' => TRUE,
                         'userId' => $data->id,
+						'accountId' => $data->account_id,
                         'fullName' => $data->first_name." ".$data->last_name
                 );
     

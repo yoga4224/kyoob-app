@@ -8,6 +8,7 @@ class Preview extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('WorkspaceModel');
 	}
 
     public function index($id){
@@ -16,5 +17,10 @@ class Preview extends CI_Controller {
         
     }
     
+	public function preview($id){
+        $creative = $this->WorkspaceModel->getCreativeByid($id);
+        $this->container['assets'] = json_decode($creative->assets);
+        $this->load->view('public/demo/demo/index', $this->container);
+    }
     
 }

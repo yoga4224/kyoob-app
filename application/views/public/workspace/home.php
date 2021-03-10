@@ -72,7 +72,11 @@
                     </div>
                 </div>
 
-
+                <div class ="row">
+                    <div class="col-lg-12">
+                        <?= $pagination ?>
+                    </div>
+                </div>
 
             </div>
 

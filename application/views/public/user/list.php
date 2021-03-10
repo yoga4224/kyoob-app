@@ -15,7 +15,7 @@
                                     
                                     <th scope="col" >Name</th>
                                     <th scope="col" >Email</th>
-                                    <th scope="col" >Account</th>
+                                    <th scope="col" >Advertiser</th>
                                     <th scope="col" >Role</th>
                                     <th scope="col" >Action</th>
                                     
@@ -26,7 +26,7 @@
                                 <tr>
                                     <td><?= $row->first_name.' '.$row->last_name ?></td>
                                     <td><?= $row->email ?></td>
-                                    <td><?= $row->account_name ?></td>
+                                    <td><?= ($row->account_name!=''?$row->account_name:'ALL') ?></td>
                                     <td><?= ($row->role == 1 ? 'Admin': ($row->role == 2 ? 'user' : '')) ?></td>
                                     <td><a style="width:100px;" class="btn btn-kyoob text-center my-2 btn-kyoob-purple" href="<?= base_url() ?>user/upsert/<?= $row->id ?>">Edit</a> <a style="width:100px;" class="btn btn-kyoob text-center my-2 btn-kyoob-pink" href="<?= base_url() ?>user/delete/<?= $row->id ?>">Delete</a></td>
                                 </tr>
