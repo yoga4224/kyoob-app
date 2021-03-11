@@ -219,6 +219,38 @@ a:focus {
     margin-bottom: 0;
 }
 
+.pagination {
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 3px;
+    list-style: none;
+    border-radius: .25rem;
+}
+
+.pagination li {
+    padding: 10px;
+    background-color: #dd679d;
+    margin-right: 5px;
+    color: #fff;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+.pagination li.disabled {
+    display: none;
+}
+
+
+.pagination li.active {
+    padding: 10px;
+    background-color: #b261b7;
+    margin-right: 5px;
+    color: #fff;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
