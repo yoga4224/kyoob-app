@@ -8,7 +8,7 @@ if ( ! function_exists('uploadImage'))
 
         $config = array();
         $config['upload_path'] = $path;
-        $config['allowed_types'] = 'jpg|png|jpeg|PNG';
+        $config['allowed_types'] = 'jpg|png|jpeg|PNG|GIF|gif';
         $config['max_size']  = '2048';
         $config['remove_space'] = TRUE;
         $config['encrypt_name'] = TRUE;

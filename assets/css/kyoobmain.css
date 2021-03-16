@@ -25,7 +25,7 @@ p {
 }
 
 .filter-bar {
-        background-color: #fff;
+    background-color: #fff;
     padding: 10px;
     border-radius: .25rem;
     margin-bottom: 40px;
@@ -37,7 +37,7 @@ p {
     border-radius: .25rem;
 }
 
-.dashboard-table td{
+.dashboard-table td {
     padding-top: 0px;
     padding-bottom: 10px;
 }
@@ -97,9 +97,38 @@ p {
     margin-bottom: 10px;
     left: 0;
     right: 0;
-    
+
     border: 9px solid #23ec01;
 }
+
+.proc-quote {
+    font-size: 12px;
+}
+
+.dimmer-color-modal-purple {
+    background-color: rgba(178, 97, 183, 0.5);
+}
+
+.center-text {
+    text-align: center;
+}
+
+.modal-header-kyoob-text {
+    font-size: 28px;
+}
+
+.filter-btn {
+    width: 110px;
+    position: absolute;
+    height: 42px;
+    top: 28px;
+}
+
+.modal-header-kyoob-text-sub {
+    padding: 0 20px 0 20px;
+    text-align: center;
+}
+
 
 .hand_cursor {
     cursor: pointer;
@@ -189,6 +218,38 @@ a:focus {
 .mb-0 {
     margin-bottom: 0;
 }
+
+.pagination {
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 3px;
+    list-style: none;
+    border-radius: .25rem;
+}
+
+.pagination li {
+    padding: 10px;
+    background-color: #dd679d;
+    margin-right: 5px;
+    color: #fff;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
+.pagination li.disabled {
+    display: none;
+}
+
+
+.pagination li.active {
+    padding: 10px;
+    background-color: #b261b7;
+    margin-right: 5px;
+    color: #fff;
+    margin-top: 10px;
+    border-radius: 3px;
+}
+
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -334,6 +395,7 @@ a.article:hover {
     display: inline-block !important;
     margin: 2px;
 }
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

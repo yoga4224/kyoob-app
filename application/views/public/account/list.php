@@ -15,7 +15,7 @@
                                     
                                     <th scope="col" >Name</th>
             <th scope="col" >Email</th>
-            <th scope="col" >CPM Price</th>
+            
             <th scope="col" >Action</th>
                                     
                                 </tr>
@@ -25,11 +25,38 @@
         <tr>
             <td><?= $row->account_name ?></td>
             <td><?= $row->email ?></td>
-            <td><?= $row->cpm_price ?></td>
             <td><a style="width:100px;" class="btn btn-kyoob text-center my-2 btn-kyoob-purple" href="<?= base_url() ?>account/upsert/<?= $row->id ?>">Edit</a>
             <a style="width:100px;" class="btn btn-kyoob text-center my-2 btn-kyoob-pink" href="<?= base_url() ?>account/delete/<?= $row->id ?>">Delete</a>
             </td>
         </tr>
         <?php } ?>
-    </table>
-</html>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+<!--copyright-->            
+<div class="copy-right-con">
+<p class="info-right-fix" style="text-align:center;">
+       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+</p>
+</div>
+<!--endofcopyright-->
+        </div>
+        <div class="col-lg-2">
+            <a href='<?=base_url('create')?>'><button class="btn btn-kyoob text-center my-2 btn-kyoob-purple">Create Ads</button></a><br>
+            <button class="btn btn-kyoob text-center my-4 btn-kyoob-pink">Contact Us</button>
+            <p class="info-right-fix">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <br><br>
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+</div>

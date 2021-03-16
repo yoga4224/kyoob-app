@@ -1,15 +1,11 @@
-<html>
-<form method="POST" action="<?=base_url()?>account/upsert">
-    <label>Account Name</label>
-    <input name="account_name" type="text" value="<?=  (!empty($data->account_name) ? $data->account_name : '') ?>" />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="container">
 
-    <label>Email</label>
-    <input name="email" type="email" value="<?=  (!empty($data->email) ? $data->email : '') ?>" />
 
-    <input name="id" type="hidden" value="<?=  (!empty($data->id) ? $data->id : '') ?>" />
-    <button type='submit'>Save</button>
-    <button type='button'>Cancel</button>
-</form>
+                <div class="row">
+                    <div class="col-lg-12">
 
                         <form method="POST" action="<?=base_url()?>account/upsert">
                             <div class="form-group">
@@ -24,11 +20,6 @@
                                 <input class="form-control" name="email" type="email" value="<?=  (!empty($data->email) ? $data->email : '') ?>" />
                             </div>
 
-                            <div class="form-group">
-                                <label>CPM Price</label>
-
-                                <input class="form-control" name="cpm_price" type="text" value="<?=  (!empty($data->cpm_price) ? $data->cpm_price : 0) ?>" />
-                            </div>
 
                             <input name="id" type="hidden" value="<?=  (!empty($data->id) ? $data->id : '') ?>" />
 

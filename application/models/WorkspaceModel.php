@@ -5,17 +5,28 @@ class WorkspaceModel extends CI_Model {
         parent::__construct();       
     }
 
-	public function getCreativePage()
+	public function getCreativePage($limit, $start, $search = null)
 	{
         $this->db->select('creative.*, template_name, width,height,master_campaign. campaign_name');
 		$this->db->order_by('creative.id DESC');
         $this->db->join('master_campaign', 'master_campaign.id = creative.campaign_id', 'left');
         $this->db->join('template_dimension', 'template_dimension.id = creative.dimension_id', 'left');
         $this->db->join('master_template', 'master_template.template_form = template_dimension.template_form', 'left');
-        
-		$data = $this->db->get("creative")->result();
+		if(!empty($_GET['campaign'])){
+			if($_GET['campaign'] != '' && $_GET['campaign'] != 'ALL')
+				$this->db->where('creative.campaign_id', $_GET['campaign']);
+		}
+		$data = $this->db->get("creative", $limit, $start)->result();
 
 		return $data;
+	}
+
+	public function countAllCreative(){
+		if(!empty($_GET['campaign'])){
+			if($_GET['campaign'] != '' && $_GET['campaign'] != 'ALL')
+				$this->db->where('creative.campaign_id', $_GET['campaign']);
+		}
+		return $this->db->count_all_results('creative');
 	}
 
     public function getCreativePageByid($id)
