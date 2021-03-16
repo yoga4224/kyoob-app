@@ -6,7 +6,7 @@
                     <div class="col-lg-12" style="margin-bottom:30px;">
                         <center>
                             <h2>Yeah... These are yours..</h2>
-                            <p class="mb-0">Agency Dentsu Indonesia</p>
+                            <p class="mb-0">Campaign <?= $campaign_name ?></p>
                             <small>Campaign Period 01 March 2021 to 8 March 2021</small>
                         </center>
                     </div>
@@ -42,7 +42,7 @@
                                         Template :&nbsp;<?= $row->template_name ?>
                                     </div>
                                     <div class="workspace-impr <?= $color_ring ?>" >
-                                        <?= $row->impressions/10000 ?><span style="font-size:15px;">K</span>
+                                        <?= round($row->impressions/1000,1) ?><span style="font-size:15px;">K</span>
                                     </div>
                                     <div class="workspace-template">
                                         Impression Served

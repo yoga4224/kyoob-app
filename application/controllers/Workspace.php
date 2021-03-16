@@ -29,9 +29,34 @@ class Workspace extends CI_Controller {
 			);
 
 		$this->container = $this->setPagination($config);
-        $this->container['account'] = $this->MainModel->getAccount();
+
+		$this->container['account'] = $this->MainModel->getAccount();
         $adv_id = ($_SESSION['accountId'] != 0 ? $_SESSION['accountId'] : '');
         $this->container['campaign'] = $this->MainModel->getCampaign($adv_id);
+
+		$advert_id = (!empty($_GET['advertiser'])?$_GET['advertiser'] : $this->container['account'][0]->id);
+		$cpm_price = ''; $adv_name = '';
+		foreach($this->container['account'] as $row){
+			if($row->id == $advert_id){
+				$cpm_price = $row->cpm_price;
+				break;
+			}
+		}
+
+		$cmp_id = (!empty($_GET['campaign'])?$_GET['campaign'] : 'ALL');
+		if($cmp_id == 'ALL'){
+			$cmp_name = $cmp_id;
+		}else{
+			foreach($this->container['campaign'] as $row){
+				if($row->id == $cmp_id){
+					$cmp_name = $row->campaign_name;
+					break;
+				}
+			}
+		}
+        
+        $this->container['campaign_name'] = $cmp_name;
+        $this->container['cpm_price'] = $cpm_price;
         $this->container['selected_page'] = 'workspace';
 
         $this->load->view('public/template/header', $this->container);
@@ -82,7 +107,7 @@ class Workspace extends CI_Controller {
 	public function processQuote($id){
 		$this->load->library('send_email');
 		$creative = $this->WorkspaceModel->getCreativePageByid($id);
-		$res = $this->send_email->send('demo.project41@gmail.com', 'demo.adm41@gmail.com', 'public/template/email/process_quote', 'Process Quote Creative - '.$creative->creative_name, $creative);
+		$res = $this->send_email->send('no-reply@gmail.com', 'demo.adm41@gmail.com', 'public/template/email/process_quote', 'Process Quote Creative - '.$creative->creative_name, $creative);
 
         if($res['success'] == 'true'){
             $this->WorkspaceModel->updateCreativeStatus($id, '1');

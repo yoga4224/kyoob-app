@@ -1,6 +1,6 @@
 $(function () {
   var where = window.location.host;
-  if(where == 'localhost:8888'){
+  if(where == 'localhost:8888' || where == 'localhost'){
       var base_url = window.location.protocol + "//" + window.location.host + "/kyoob-app/";
   }
   else{

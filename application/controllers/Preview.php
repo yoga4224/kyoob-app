@@ -23,4 +23,7 @@ class Preview extends CI_Controller {
         $this->load->view('public/demo/demo/index', $this->container);
     }
     
+    public function impressionTracker($id){
+        $this->WorkspaceModel->addImpression($id);
+    }
 }

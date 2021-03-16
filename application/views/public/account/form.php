@@ -20,6 +20,11 @@
                                 <input class="form-control" name="email" type="email" value="<?=  (!empty($data->email) ? $data->email : '') ?>" />
                             </div>
 
+                            <div class="form-group">
+                                <label>CPM Price</label>
+
+                                <input class="form-control" name="cpm_price" type="text" value="<?=  (!empty($data->cpm_price) ? $data->cpm_price : 0) ?>" />
+                            </div>
 
                             <input name="id" type="hidden" value="<?=  (!empty($data->id) ? $data->id : '') ?>" />
 

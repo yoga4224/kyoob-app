@@ -116,7 +116,6 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Select Advertiser</label>
                                         <select <?= ($_SESSION['accountId'] != 0 ? 'disabled': '') ?> name="advertiser" class="form-control" id="exampleFormControlSelect1">
-                                            <option value="ALL">All Advertiser</option>
                                             <?php 
                                                 foreach($account as $row){
                                                     echo "<option ".($_SESSION['accountId'] != 0 ? 'selected': ($_GET['advertiser']==$row->id?'selected':''))." value='".$row->id."' >".$row->account_name."</option>";

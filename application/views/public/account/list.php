@@ -15,7 +15,7 @@
                                     
                                     <th scope="col" >Name</th>
             <th scope="col" >Email</th>
-            
+            <th scope="col" >CPM Price</th>
             <th scope="col" >Action</th>
                                     
                                 </tr>
@@ -25,6 +25,7 @@
         <tr>
             <td><?= $row->account_name ?></td>
             <td><?= $row->email ?></td>
+            <td><?= $row->cpm_price ?></td>
             <td><a style="width:100px;" class="btn btn-kyoob text-center my-2 btn-kyoob-purple" href="<?= base_url() ?>account/upsert/<?= $row->id ?>">Edit</a>
             <a style="width:100px;" class="btn btn-kyoob text-center my-2 btn-kyoob-pink" href="<?= base_url() ?>account/delete/<?= $row->id ?>">Delete</a>
             </td>

@@ -68,6 +68,10 @@ class CreateModel extends CI_Model {
 			$arr['created_by'] = $params['userLog'];
 			$arr['created_date'] = date('Y-m-d H:i:s');
 			$exec = $this->db->insert("creative", $arr);
+			$insert_id = $this->db->insert_id();
+
+			$arr_log = array('creative_id' => $insert_id, 'impressions' => 0);
+			$exec = $this->db->insert("impression_log", $arr_log);
 		}
 
 		return $exec;

@@ -89,7 +89,7 @@
                                     <td><?= $row->template_name ?></td>
                                     <td><?= $row->width.'x'.$row->height ?></td>
                                     <td><?= $row->impressions ?></td>
-                                    <td><?= $row->impressions+50000 ?></td>
+                                    <td><?= $row->impressions*$cpm_price/1000 ?></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
