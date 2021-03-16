@@ -61,6 +61,7 @@ class WorkspaceModel extends CI_Model {
 
 	public function addImpression($id){
 		$this->db->set('impressions', 'impressions+1', FALSE);
+		$this->db->set('updated_date', date('Y-m-d H:i:s'));
 		$this->db->where("creative_id", $id);
 		$exec = $this->db->update("impression_log");
 	}
