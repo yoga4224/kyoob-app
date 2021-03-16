@@ -91,30 +91,39 @@
                         <div class="row">
                         <div class="col-7">
                             <ul class="nav" style="list-style:none;">
-                            <li class='li-pdr-20'>
-                                <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Select Advertiser</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Dentsu Aegis</option>
-                                        <option>Dentsu Aegis</option>
-                                        <option>Dentsu Aegis</option>
-                                    </select>
-                                </div>
-                            </li>
-                            <li class='li-pdr-20'>
-                                <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Select Campaign</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>All Campaign</option>
-                                        <option>Disney Frozen</option>
-                                        <option>Disney Toy's Story</option>
-                                        <option>Disney Terminator 6</option>
-                                    </select>
-                                </div>
-                            </li>
+                                <li class='li-pdr-20'>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Select Advertiser</label>
+                                        <select <?= ($_SESSION['accountId'] != 0 ? 'disabled': '') ?> name="advertiser" class="form-control" id="exampleFormControlSelect1">
+                                            <?php 
+                                                foreach($account as $row){
+                                                    echo "<option ".($_SESSION['accountId'] != 0 ? 'selected': ($_GET['advertiser']==$row->id?'selected':''))." value='".$row->id."' >".$row->account_name."</option>";
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li class='li-pdr-20'>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Select Campaign</label>
+                                        <select name="campaign" class="form-control" id="exampleFormControlSelect1">
+                                            <option value="ALL">All Campaign</option>
+                                            <?php 
+                                                foreach($campaign as $row){
+                                                    echo "<option ".($_GET['campaign']==$row->id?'selected':'')." value='".$row->id."' >".$row->campaign_name."</option>";
+                                                }
+                                            ?>
+                                        </select>
 
-                        </ul>
-                            </div>
+                                    </div>
+                                </li>
+                                <li class='li-pdr-20'>
+
+                                    <button type="submit" class="btn btn-kyoob text-center my-4 btn-kyoob-purple filter-btn">Filter</button>
+
+                                </li>
+                            </ul>
+                        </div>
                         <div class="col-5 float-right ">
                             <div class="row">
                             <div class="col-lg-10 text-right">

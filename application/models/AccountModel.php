@@ -23,18 +23,11 @@ class AccountModel extends CI_Model {
 	}
 
 	public function upsertAccount($params){
-		// $this->load->library('s3_upload');
-		// $userImage = uploadImage('userImage', './assets/temp');
-		// $url_image = "";
-		// if(!empty($userImage['file']['file_name'])){
-		// 	$file_url = $this->s3_upload->upload_file($userImage['file']['full_path'], 'master_account/');
-		// 	$url_image = "https://amazonaws.com/master_account/".$file_url['name'];
-		// 	$this->db->set("image",$url_image);
-		// }
 
 		$arr = array(
 			'email' => $params['email'],
 			'account_name' => $params['account_name'],
+			'cpm_price' => $params['cpm_price'],
 			'status' => '1',
 		);
 

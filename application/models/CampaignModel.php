@@ -33,14 +33,6 @@ class CampaignModel extends CI_Model {
 	}
 
 	public function upsertCampaign($params){
-		// $this->load->library('s3_upload');
-		// $userImage = uploadImage('userImage', './assets/temp');
-		// $url_image = "";
-		// if(!empty($userImage['file']['file_name'])){
-		// 	$file_url = $this->s3_upload->upload_file($userImage['file']['full_path'], 'master_campaign/');
-		// 	$url_image = "https://amazonaws.com/master_campaign/".$file_url['name'];
-		// 	$this->db->set("image",$url_image);
-		// }
 
 		$arr = array(
 			'account_id' 	=> $params['account_id'],

@@ -5,8 +5,8 @@
                 <div class="row">
                     <div class="col-lg-12" style="margin-bottom:30px;">
                         <center>
-                            <h2>Advertiser Overview Dashboard</h2>
-                            <p class="mb-0">Agency Dentsu Indonesia</p>
+                            <h2><?= $advertiser_name ?> Overview Dashboard</h2>
+                            <p class="mb-0">Campaign <?= $campaign_name ?></p>
                             <small>Campaign Period 01 March 2021 to 8 March 2021</small>
                         </center>
                     </div>
@@ -23,7 +23,7 @@
                                 <div class="card-body">
 
                                     <div class="card-text val-card">
-                                        40
+                                        <?= $total_creative ?>
                                     </div>
                                     <div class="card-text sub-val-card">
                                         Active campaign
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="card-text val-card">
-                                        1.500.000
+                                        <?= $total_impressions ?>
                                     </div>
                                     <div class="card-text sub-val-card">
                                         Impression served
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="card-text val-card">
-                                        20.500.000
+                                        <?= $total_cost ?>
                                     </div>
                                     <div class="card-text sub-val-card">
                                         (IDR)
