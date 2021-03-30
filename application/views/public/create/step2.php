@@ -85,7 +85,7 @@
 <!--copyright-->            
 <div class="copy-right-con">
 <p class="info-right-fix" style="text-align:center;">
-       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+       * Note : Please upload *.jpg or *.png or *.gif only. Max image size per face is 2mb.
 </p>
 </div>
 <!--endofcopyright-->
