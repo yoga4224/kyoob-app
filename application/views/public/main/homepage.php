@@ -7,7 +7,6 @@
                         <center>
                             <h2><?= $advertiser_name ?> Overview Dashboard</h2>
                             <p class="mb-0">Campaign <?= $campaign_name ?></p>
-                            <small>Campaign Period 01 March 2021 to 8 March 2021</small>
                         </center>
                     </div>
                 </div>

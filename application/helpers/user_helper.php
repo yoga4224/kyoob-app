@@ -46,3 +46,19 @@ if ( ! function_exists('templateForm'))
           return $form;
     }
 }
+
+if ( ! function_exists('impServed'))
+{
+    function impServed($total_imp) 
+    {
+        if($total_imp < 1000){
+            $imp = $total_imp;
+        }elseif($total_imp >= 1000 && $total_imp < 1000000){
+            $imp = round(($total_imp/1000),1)."<span style='font-size:15px;'>K</span>";
+        }elseif($total_imp >= 1000000){
+            $imp = round(($total_imp/1000000),1)."<span style='font-size:15px;'>M</span>";
+        }
+
+        return $imp;
+    }
+}

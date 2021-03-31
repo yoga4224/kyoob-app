@@ -7,7 +7,6 @@
                         <center>
                             <h2>Yeah... These are yours..</h2>
                             <p class="mb-0">Campaign <?= $campaign_name ?></p>
-                            <small>Campaign Period 01 March 2021 to 8 March 2021</small>
                         </center>
                     </div>
                 </div>
@@ -42,7 +41,7 @@
                                         Template :&nbsp;<?= $row->template_name ?>
                                     </div>
                                     <div class="workspace-impr <?= $color_ring ?>" >
-                                        <?= round($row->impressions/1000,1) ?><span style="font-size:15px;">K</span>
+                                        <?= impServed($row->impressions) ?>
                                     </div>
                                     <div class="workspace-template">
                                         Impression Served

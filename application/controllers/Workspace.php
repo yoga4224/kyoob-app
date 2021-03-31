@@ -15,6 +15,8 @@ class Workspace extends CI_Controller {
 	
 	public function index()
 	{
+		$this->load->helper('user');
+		
         $page = (!empty($_GET['per_page']) ? $_GET['per_page'] : 0);
 		$getData = $this->WorkspaceModel->getCreativePage($this->per_page, $page);
 		$total_rows = $this->WorkspaceModel->countAllCreative();
@@ -140,12 +142,13 @@ class Workspace extends CI_Controller {
 		$string = read_file('./assets/template/3dcube/index.html');
 		$assets = json_decode($creative->assets);
 
-        $from = ["{{image1}}", "{{image2}}", "{{image3}}", "{{image4}}"];
+        $from = ["{{image1}}", "{{image2}}", "{{image3}}", "{{image4}}", "{{id}}"];
         $to   = [
                     $assets[0]->url, 
                     $assets[1]->url,
                     $assets[2]->url,
-                    $assets[3]->url
+                    $assets[3]->url,
+					$creative->id
                 ];
 
         $string = str_replace($from,$to,$string);
